@@ -1,7 +1,7 @@
 {
  "name": "punkt",
  "start": "100",
- "cash": "0.05372",
+ "cash": "0.00239",
  "positions": {
   "kalshi:KXBTCD-26OCT1617-T83999.99": {
    "platform": "kalshi",
@@ -455,6 +455,25 @@
    "direction": "range",
    "lower": 1750.0,
    "upper": 1999.99,
+   "quality": "interpoliert",
+   "band": "punkt",
+   "hedge_cost": 0.0
+  },
+  "polymarket:5506712": {
+   "platform": "polymarket",
+   "market_id": "5506712",
+   "ticker": null,
+   "yes_token": "89717948076101401645422321104134514763008925183197431592438687183921536470934",
+   "no_token": "101413822946322984109672450589307344317135728829451285563597646528226589488788",
+   "side": "no",
+   "shares": "6",
+   "cost": "0.05133",
+   "threshold": 95.0,
+   "settle_time": "2026-10-17T16:00:00Z",
+   "asset": "SOL",
+   "direction": "above",
+   "lower": 95.0,
+   "upper": null,
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0
