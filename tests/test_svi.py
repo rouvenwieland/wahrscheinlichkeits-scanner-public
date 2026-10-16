@@ -45,10 +45,23 @@ def test_fit_recovers_known_smile(p):
     assert max(abs(r.params.w(k) - p.w(k)) for k in ks) < 2e-5
 
 
-@given(p=svi_params)
-@settings(max_examples=40)
+calm_params = st.builds(  # flache Smiles mit genug Mindestvarianz: sicher ohne Schmetterlings-Arbitrage
+    lambda a, b, rho, m, s: Svi(a, b, rho, m, s),
+    a=st.floats(0.0005, 0.003), b=st.floats(0.002, 0.015), rho=st.floats(-0.6, 0.4),
+    m=st.floats(-0.03, 0.03), s=st.floats(0.05, 0.15))
+
+
+@given(p=calm_params)
+@settings(max_examples=60)
 def test_reasonable_svi_is_arbitrage_free(p):
     assert arbitrage_problems(p, -0.2, 0.2) == []
+
+
+def test_sharp_smile_with_tiny_variance_is_flagged():
+    """Von Hypothesis gefunden (CI, 16.10.2026): spitzer Smile mit sehr kleiner Varianz hat
+    Schmetterlings-Arbitrage (g < 0) und muss erkannt werden."""
+    p = Svi(0.0002, 0.03, 0.5, 0.02734375, 0.021484375)
+    assert "schmetterling" in arbitrage_problems(p, -0.2, 0.2)
 
 
 def test_known_butterfly_arbitrage_is_detected():
