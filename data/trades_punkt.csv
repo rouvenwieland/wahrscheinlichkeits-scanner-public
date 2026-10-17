@@ -52,3 +52,6 @@ time,kind,platform,market,side,shares,avg_price,fee,cash_flow,cash_after,note
 2026-10-17T17:33:57Z,SETTLE,polymarket,5506712,no,6,0,0,0,0.01877,ergebnis=yes
 2026-10-17T17:33:57Z,SETTLE,polymarket,5506670,no,5,1,0,5,5.01877,ergebnis=no
 2026-10-17T17:33:57Z,SETTLE,polymarket,5506691,no,5,1,0,5,10.01877,ergebnis=no
+2026-10-17T19:43:43Z,BUY,kalshi,KXBTCD-26OCT1717-T81499.99,yes,10,0.4800,0.18,-4.9800,5.03877,
+2026-10-17T19:43:43Z,BUY,kalshi,KXBTCD-26OCT2317-T80999.99,yes,8,0.5800,0.14,-4.7800,0.25877,
+2026-10-17T19:43:43Z,BUY,kalshi,KXBTC-26OCT1717-B81875,yes,3,0.0600,0.02,-0.2000,0.05877,
