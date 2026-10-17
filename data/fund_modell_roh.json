@@ -1,7 +1,7 @@
 {
  "name": "modell_roh",
  "start": "100",
- "cash": "73.0070",
+ "cash": "68.7370",
  "positions": {
   "kalshi:KXETHY-27JAN0100-T4999.99": {
    "platform": "kalshi",
@@ -56,6 +56,25 @@
    "direction": "range",
    "lower": 2000.0,
    "upper": 2249.99,
+   "quality": "interpoliert",
+   "band": "modell",
+   "hedge_cost": 0.0
+  },
+  "kalshi:KXXRP-26OCT2317-B1.2699500": {
+   "platform": "kalshi",
+   "market_id": "KXXRP-26OCT2317-B1.2699500",
+   "ticker": "KXXRP-26OCT2317-B1.2699500",
+   "yes_token": null,
+   "no_token": null,
+   "side": "yes",
+   "shares": "80",
+   "cost": "4.2700",
+   "threshold": 1.26,
+   "settle_time": "2026-10-23T21:00:00Z",
+   "asset": "XRP",
+   "direction": "range",
+   "lower": 1.26,
+   "upper": 1.2799,
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0
