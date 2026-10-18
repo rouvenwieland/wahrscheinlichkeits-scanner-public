@@ -1,7 +1,7 @@
 {
  "name": "punkt",
  "start": "100",
- "cash": "0.03474",
+ "cash": "0.00157",
  "positions": {
   "kalshi:KXBTCY-27JAN0100-B87500": {
    "platform": "kalshi",
@@ -511,6 +511,25 @@
    "asset": "ETH",
    "direction": "above",
    "lower": 2329.99,
+   "upper": null,
+   "quality": "interpoliert",
+   "band": "punkt",
+   "hedge_cost": 0.0
+  },
+  "polymarket:5610564": {
+   "platform": "polymarket",
+   "market_id": "5610564",
+   "ticker": null,
+   "yes_token": "68885468033297926738407130066758643550213293970960120576338015964029023628870",
+   "no_token": "64920634538512684237590648698185856218543763821648137657477964539385984680964",
+   "side": "no",
+   "shares": "9",
+   "cost": "0.03317",
+   "threshold": 2100.0,
+   "settle_time": "2026-10-19T16:00:00Z",
+   "asset": "ETH",
+   "direction": "above",
+   "lower": 2100.0,
    "upper": null,
    "quality": "interpoliert",
    "band": "punkt",
