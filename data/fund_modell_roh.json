@@ -1,7 +1,7 @@
 {
  "name": "modell_roh",
  "start": "100",
- "cash": "26.96907",
+ "cash": "35.96907",
  "positions": {
   "kalshi:KXETHY-27JAN0100-T4999.99": {
    "platform": "kalshi",
@@ -113,25 +113,6 @@
    "direction": "above",
    "lower": 2329.99,
    "upper": null,
-   "quality": "interpoliert",
-   "band": "modell",
-   "hedge_cost": 0.0
-  },
-  "polymarket:5653796": {
-   "platform": "polymarket",
-   "market_id": "5653796",
-   "ticker": null,
-   "yes_token": "20550494201270506400252895873881970748714143343223807758526071669962460610437",
-   "no_token": "92040849069059027713777882412630688827289651286071519502316179069257613986927",
-   "side": "yes",
-   "shares": "9",
-   "cost": "4.20593",
-   "threshold": 2400.0,
-   "settle_time": "2026-10-20T16:00:00Z",
-   "asset": "ETH",
-   "direction": "range",
-   "lower": 2400.0,
-   "upper": 2500.0,
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0
