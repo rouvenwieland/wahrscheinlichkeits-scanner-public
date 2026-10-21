@@ -1,7 +1,7 @@
 {
  "name": "punkt",
  "start": "100",
- "cash": "0.13814",
+ "cash": "0.00814",
  "positions": {
   "kalshi:KXBTCY-27JAN0100-B87500": {
    "platform": "kalshi",
@@ -607,6 +607,25 @@
    "direction": "range",
    "lower": 2450.0,
    "upper": 2489.99,
+   "quality": "interpoliert",
+   "band": "punkt",
+   "hedge_cost": 0.0
+  },
+  "kalshi:KXSOLE-26OCT2317-B98": {
+   "platform": "kalshi",
+   "market_id": "KXSOLE-26OCT2317-B98",
+   "ticker": "KXSOLE-26OCT2317-B98",
+   "yes_token": null,
+   "no_token": null,
+   "side": "yes",
+   "shares": "2",
+   "cost": "0.1300",
+   "threshold": 98.0,
+   "settle_time": "2026-10-23T21:00:00Z",
+   "asset": "SOL",
+   "direction": "range",
+   "lower": 98.0,
+   "upper": 98.9999,
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0
