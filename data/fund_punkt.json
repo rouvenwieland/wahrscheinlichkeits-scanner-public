@@ -1,7 +1,7 @@
 {
  "name": "punkt",
  "start": "100",
- "cash": "0.12814",
+ "cash": "0.03814",
  "positions": {
   "kalshi:KXBTCY-27JAN0100-B87500": {
    "platform": "kalshi",
@@ -493,6 +493,25 @@
    "direction": "range",
    "lower": 75000.0,
    "upper": 79999.99,
+   "quality": "interpoliert",
+   "band": "punkt",
+   "hedge_cost": 0.0
+  },
+  "kalshi:KXXRPD-26OCT2317-T1.2599": {
+   "platform": "kalshi",
+   "market_id": "KXXRPD-26OCT2317-T1.2599",
+   "ticker": "KXXRPD-26OCT2317-T1.2599",
+   "yes_token": null,
+   "no_token": null,
+   "side": "no",
+   "shares": "2",
+   "cost": "0.0900",
+   "threshold": 1.2599,
+   "settle_time": "2026-10-23T21:00:00Z",
+   "asset": "XRP",
+   "direction": "above",
+   "lower": 1.2599,
+   "upper": null,
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0

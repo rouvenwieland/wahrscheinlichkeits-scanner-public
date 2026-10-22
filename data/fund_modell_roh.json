@@ -1,7 +1,7 @@
 {
  "name": "modell_roh",
  "start": "100",
- "cash": "64.16907",
+ "cash": "55.99507",
  "positions": {
   "kalshi:KXETHY-27JAN0100-T4999.99": {
    "platform": "kalshi",
@@ -132,6 +132,44 @@
    "direction": "range",
    "lower": 2450.0,
    "upper": 2489.99,
+   "quality": "interpoliert",
+   "band": "modell",
+   "hedge_cost": 0.0
+  },
+  "kalshi:KXBTCY-27JAN0100-B72500": {
+   "platform": "kalshi",
+   "market_id": "KXBTCY-27JAN0100-B72500",
+   "ticker": "KXBTCY-27JAN0100-B72500",
+   "yes_token": null,
+   "no_token": null,
+   "side": "yes",
+   "shares": "53",
+   "cost": "4.4040",
+   "threshold": 70000.0,
+   "settle_time": "2027-01-01T05:00:00Z",
+   "asset": "BTC",
+   "direction": "range",
+   "lower": 70000.0,
+   "upper": 74999.99,
+   "quality": "interpoliert",
+   "band": "modell",
+   "hedge_cost": 0.0
+  },
+  "kalshi:KXETHD-26OCT2317-T2369.99": {
+   "platform": "kalshi",
+   "market_id": "KXETHD-26OCT2317-T2369.99",
+   "ticker": "KXETHD-26OCT2317-T2369.99",
+   "yes_token": null,
+   "no_token": null,
+   "side": "yes",
+   "shares": "5",
+   "cost": "3.7700",
+   "threshold": 2369.99,
+   "settle_time": "2026-10-23T21:00:00Z",
+   "asset": "ETH",
+   "direction": "above",
+   "lower": 2369.99,
+   "upper": null,
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0
