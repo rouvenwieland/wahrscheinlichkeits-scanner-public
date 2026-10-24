@@ -269,25 +269,6 @@
    "band": "punkt",
    "hedge_cost": 0.0
   },
-  "polymarket:5822990": {
-   "platform": "polymarket",
-   "market_id": "5822990",
-   "ticker": null,
-   "yes_token": "107922779176762184486391055309381822052538567210744135346761617134834839698000",
-   "no_token": "87446547589263390469208229138850382611411943684366260448581937760261129583186",
-   "side": "no",
-   "shares": "15",
-   "cost": "0.32058",
-   "threshold": 78000.0,
-   "settle_time": "2026-10-24T16:00:00Z",
-   "asset": "BTC",
-   "direction": "above",
-   "lower": 78000.0,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "punkt",
-   "hedge_cost": 0.0
-  },
   "kalshi:KXBTCD-26OCT2417-T82499.99": {
    "platform": "kalshi",
    "market_id": "KXBTCD-26OCT2417-T82499.99",
