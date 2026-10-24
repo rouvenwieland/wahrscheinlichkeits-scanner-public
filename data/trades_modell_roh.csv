@@ -47,3 +47,4 @@ time,kind,platform,market,side,shares,avg_price,fee,cash_flow,cash_after,note
 2026-10-23T21:43:38Z,SETTLE,kalshi,KXETHD-26OCT2317-T2329.99,yes,7,1,0,7,58.46707,ergebnis=yes
 2026-10-23T21:43:38Z,SETTLE,kalshi,KXETH-26OCT2317-B2470,yes,5,0,0,0,58.46707,ergebnis=no
 2026-10-23T21:43:38Z,SETTLE,kalshi,KXETHD-26OCT2317-T2369.99,yes,5,1,0,5,63.46707,ergebnis=yes
+2026-10-24T05:05:34Z,BUY,kalshi,KXETHD-26OCT3017-T2639.99,no,4,0.9300,0.02,-3.7400,59.72707,
