@@ -192,25 +192,6 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0
-  },
-  "polymarket:5889089": {
-   "platform": "polymarket",
-   "market_id": "5889089",
-   "ticker": null,
-   "yes_token": "18463044841401217737419414954427357699513745475112110842928250893245529889390",
-   "no_token": "58470014353798079535264859529517009303009473904696766980177769189654143653195",
-   "side": "no",
-   "shares": "39",
-   "cost": "4.55727",
-   "threshold": 80000.0,
-   "settle_time": "2026-10-25T16:00:00Z",
-   "asset": "BTC",
-   "direction": "range",
-   "lower": 80000.0,
-   "upper": 82000.0,
-   "quality": "interpoliert",
-   "band": "modell",
-   "hedge_cost": 0.0
   }
  }
 }
