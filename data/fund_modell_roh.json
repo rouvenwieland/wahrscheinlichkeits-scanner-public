@@ -1,7 +1,7 @@
 {
  "name": "modell_roh",
  "start": "100",
- "cash": "21.75176",
+ "cash": "17.00676",
  "positions": {
   "kalshi:KXETHY-27JAN0100-T4999.99": {
    "platform": "kalshi",
@@ -322,6 +322,25 @@
    "direction": "range",
    "lower": 85000.0,
    "upper": 89999.99,
+   "quality": "interpoliert",
+   "band": "modell",
+   "hedge_cost": 0.0
+  },
+  "kalshi:KXBTCY-27JAN0100-B102500": {
+   "platform": "kalshi",
+   "market_id": "KXBTCY-27JAN0100-B102500",
+   "ticker": "KXBTCY-27JAN0100-B102500",
+   "yes_token": null,
+   "no_token": null,
+   "side": "no",
+   "shares": "5",
+   "cost": "4.7450",
+   "threshold": 100000.0,
+   "settle_time": "2027-01-01T05:00:00Z",
+   "asset": "BTC",
+   "direction": "range",
+   "lower": 100000.0,
+   "upper": 104999.99,
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0
