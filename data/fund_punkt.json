@@ -1,7 +1,7 @@
 {
  "name": "punkt",
  "start": "100",
- "cash": "0.05931",
+ "cash": "0.00690",
  "positions": {
   "kalshi:KXBTCY-27JAN0100-B87500": {
    "platform": "kalshi",
@@ -345,25 +345,6 @@
    "band": "punkt",
    "hedge_cost": 0.0
   },
-  "kalshi:KXETHD-26OCT2917-T2269.99": {
-   "platform": "kalshi",
-   "market_id": "KXETHD-26OCT2917-T2269.99",
-   "ticker": "KXETHD-26OCT2917-T2269.99",
-   "yes_token": null,
-   "no_token": null,
-   "side": "yes",
-   "shares": "4",
-   "cost": "3.1300",
-   "threshold": 2269.99,
-   "settle_time": "2026-10-29T21:00:00Z",
-   "asset": "ETH",
-   "direction": "above",
-   "lower": 2269.99,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "punkt",
-   "hedge_cost": 0.0
-  },
   "kalshi:KXETHD-26OCT3017-T2279.99": {
    "platform": "kalshi",
    "market_id": "KXETHD-26OCT3017-T2279.99",
@@ -383,21 +364,21 @@
    "band": "punkt",
    "hedge_cost": 0.0
   },
-  "kalshi:KXXRPD-26OCT2917-T1.2799": {
-   "platform": "kalshi",
-   "market_id": "KXXRPD-26OCT2917-T1.2799",
-   "ticker": "KXXRPD-26OCT2917-T1.2799",
-   "yes_token": null,
-   "no_token": null,
+  "polymarket:6084486": {
+   "platform": "polymarket",
+   "market_id": "6084486",
+   "ticker": null,
+   "yes_token": "64440777436935354290680846232268928968850064736717198897607041268368017318401",
+   "no_token": "18967283842405992469511105718072059167963894065497151359004900418857291046915",
    "side": "yes",
-   "shares": "2",
-   "cost": "1.4500",
-   "threshold": 1.2799,
-   "settle_time": "2026-10-29T21:00:00Z",
-   "asset": "XRP",
-   "direction": "above",
-   "lower": 1.2799,
-   "upper": null,
+   "shares": "7",
+   "cost": "0.05241",
+   "threshold": 72000.0,
+   "settle_time": "2026-10-30T16:00:00Z",
+   "asset": "BTC",
+   "direction": "range",
+   "lower": 72000.0,
+   "upper": 74000.0,
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0
