@@ -91,14 +91,22 @@ class Slice:
         return [math.log(K / self.F) for K in self.strikes]
 
     def w_at(self, k: float):
-        """(w, dw/dk) linear in k aus Mark-IV interpoliert; None ausserhalb der Strikes."""
+        """(w, dw/dk): w linear in k aus Mark-IV interpoliert; None ausserhalb der Strikes.
+
+        Die Steigung ist zwischen den zentralen Differenzen der Knoten linear interpoliert
+        (stetig). Vorher war es die Steigung des Abschnitts; dann sprang das Digital an jedem
+        Strike um bis zu 9 Punkte und schmale Spannen bekamen Scheinmasse (Reparatur 27.10.2026)."""
         ks = self.k_nodes()
         if len(ks) < 2 or k < ks[0] or k > ks[-1]:
             return None
         i = min(bisect_right(ks, k) - 1, len(ks) - 2)
-        w0, w1 = self.iv[i] ** 2 * self.T, self.iv[i + 1] ** 2 * self.T
-        slope = (w1 - w0) / (ks[i + 1] - ks[i])
-        return w0 + slope * (k - ks[i]), slope
+        ws = (self.iv[i - 1] ** 2 * self.T if i > 0 else None, self.iv[i] ** 2 * self.T,
+              self.iv[i + 1] ** 2 * self.T, self.iv[i + 2] ** 2 * self.T if i + 2 < len(ks) else None)
+        seg = (ws[2] - ws[1]) / (ks[i + 1] - ks[i])
+        s0 = seg if ws[0] is None else (ws[2] - ws[0]) / (ks[i + 1] - ks[i - 1])
+        s1 = seg if ws[3] is None else (ws[3] - ws[1]) / (ks[i + 2] - ks[i])
+        t = (k - ks[i]) / (ks[i + 1] - ks[i])
+        return ws[1] + seg * (k - ks[i]), (1 - t) * s0 + t * s1
 
     def strike_range(self):
         return (self.strikes[0], self.strikes[-1]) if self.strikes else None
@@ -430,20 +438,44 @@ class Surface:
         # Log-Moneyness); "skaliert": w = theta*w2(k/sqrt(theta)) (Smile skaliert mit sqrt(T),
         # dickere Raender). Das Band nimmt beide.
         shapes = ("fest", "skaliert") if br.method == "vorlauf" else ("fest",)
+        # Ein Drehpunkt fuer beide Grenzen einer Spanne (sonst kaemen unteres und oberes Digital
+        # aus zwei verschiedenen Kipp-Fits und die Spanne waere keine Masse einer Verteilung).
+        pivot_base = math.sqrt(lower * upper) if lower is not None and upper is not None else bounds[0]
+        if br.method == "vorlauf":
+            # "skaliert" liest den Smile bei k/sqrt(theta), also 3- bis 5-mal weiter draussen, als
+            # die Pruefungen oben reichen. Liegt das ausserhalb des Fits, faellt die Form weg
+            # (Reparatur 27.10.2026: KXSOLE-26OCT1717-B99 bekam so p_mid 0,456 fuer 1 USD Spanne).
+            pos_thetas = [t for t in thetas if t > 0]
+            F_ = (1 - theta_lin) * br.F0 + theta_lin * br.s2.F
+            if pos_thetas:
+                c_max = 1.0 / math.sqrt(min(pos_thetas))
+                ks = [math.log(x * sh / F_) for x in bounds + [pivot_base] for sh in shifts]
+                if not all(models[-1].in_range(k * c_max) for k in ks):
+                    shapes = ("fest",)
+                    notes.append("skaliert_ausserhalb")
 
         def dig(label, base, s, theta, shape):
-            """Digital bei Schwelle ``base * s``; der Kipp-Drehpunkt haengt nur an ``base`` und
-            liegt in derselben Moneyness wie die Auswertung."""
+            """Digital bei Schwelle ``base * s``; der Kipp-Drehpunkt haengt nur an ``pivot_base``
+            und liegt in derselben Moneyness wie die Auswertung. None, wenn das Digital nicht in
+            [0, 1] liegt (der Fit ist dort unbrauchbar)."""
+            d = _dig(label, base, s, theta, shape)
+            if d is not None and not -1e-6 <= d <= 1.0 + 1e-6:
+                if "digital_ungueltig" not in notes:
+                    notes.append("digital_ungueltig")
+                return None
+            return d
+
+        def _dig(label, base, s, theta, shape):
             if br.method == "exakt":
                 m = models[0]
                 k = math.log(base * s / m.sl.F)
-                r = m.wd(label, k, math.log(base / m.sl.F))
+                r = m.wd(label, k, math.log(pivot_base / m.sl.F))
                 if r is None or r[0] <= 0:
                     return None
                 return digital_w(k, r[0], r[1])
             F = (1 - theta_lin) * br.F0 + theta_lin * br.s2.F
             k = math.log(base * s / F)
-            piv = math.log(base / F)
+            piv = math.log(pivot_base / F)
             m2 = models[-1]
             if br.method == "vorlauf":
                 if theta <= 0:
@@ -469,7 +501,7 @@ class Surface:
         def payoff(label, theta, s, shape="fest"):
             dl = 1.0 if lower is None else dig(label, lower, s, theta, shape)
             du = 0.0 if upper is None else dig(label, upper, s, theta, shape)
-            if dl is None or du is None:
+            if dl is None or du is None or dl < du - 1e-9:  # negative Masse: Arbitrage im Fit
                 return None
             return _clip(dl - du)
 

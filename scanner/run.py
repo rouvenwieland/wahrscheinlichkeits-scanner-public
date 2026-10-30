@@ -25,7 +25,7 @@ from typing import Optional
 from . import deribit, kalshi, matching, polymarket
 from .assets import ASSETS, DELTA_KALSHI, DELTA_LINEAR_EXTRA, DELTA_POLY_BASE, Asset
 from .fees import fee_per_share_estimate
-from .fund import FUNDS, MIN_EDGE, Fund, band_for, edges
+from .fund import FUND_KEYS, FUNDS, MIN_EDGE, SIZES, Fund, band_for, edges
 from .hedge import market_hedge
 from .http import FetchError
 from .kalshi import Book, Level
@@ -39,13 +39,14 @@ PRESCREEN_TOL = Decimal("0.01")  # Listenkurse koennen veraltet sein: Buch schon
 STAT_BOOKS = 20  # zusaetzlich die besten Maerkte fuer die Statistik, auch ohne Aussicht auf Einstieg
 MAX_DRIFT = 0.001  # bewegt sich der Kassakurs waehrend des Laufs staerker, kein Einstieg
 CLOCK_DAYS = 60
+HANGING_AFTER = timedelta(hours=24)  # nach Abrechnungszeit noch offen -> Warnung
 SNAPSHOT_DAYS = 14  # Rohdaten je Lauf (gepackt, nur lokal) fuer spaetere Nachrechnung
 OBS_FIELDS = ["timestamp", "asset", "platform", "id", "direction", "lower", "upper", "settle_time",
               "quality", "p_mid", "p_low", "p_high", "m_low", "m_high", "notes", "hedge_exec",
               "hedge_model", "hedge_n_min", "quelle", "yes_ask", "no_ask", "yes_depth", "no_depth",
               "edge_huelle_roh", "edge_huelle_hedge", "edge_modell_roh", "edge_modell_hedge",
               "edge_punkt_roh"] + \
-             [f"decision_{n}" for n in FUNDS]
+             [f"decision_{n}" for n in FUNDS]  # nur 100-USD-Fonds; Groessenstufen in last_scan.json
 
 
 def iso(dt: datetime) -> str:
@@ -301,7 +302,7 @@ def scan(data_dir: Path, now: Optional[datetime] = None, snapshots: bool = True)
     markets = collect_markets(rejections, raw_store)
     matched = match_markets(markets, unds, now, rejections)
 
-    funds = {n: Fund(n, data_dir) for n in FUNDS}
+    funds = {n: Fund(n, data_dir) for n in FUND_KEYS}
     scored = sorted(((prescreen_score(m), i) for i, m in enumerate(matched)),
                     key=lambda t: -(t[0] if t[0] is not None else Decimal(-9)))
     hopeful = [i for s, i in scored if s is not None and s >= -PRESCREEN_TOL]
@@ -359,7 +360,7 @@ def scan(data_dir: Path, now: Optional[datetime] = None, snapshots: bool = True)
             "yes_depth": _f(e0["yes_depth"], 0) if book is not None else "",
             "no_depth": _f(e0["no_depth"], 0) if book is not None else "",
             **{k: _f(v, 4) for k, v in es.items()},
-            **{f"decision_{n}": d for n, d in decisions.items()}})
+            **{f"decision_{n}": decisions[n] for n in FUNDS}})
 
     path = observation_path(data_dir, now)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -374,8 +375,14 @@ def scan(data_dir: Path, now: Optional[datetime] = None, snapshots: bool = True)
     for n, f in funds.items():
         assert f.invariant_ok(), f"Kassen-Invariante verletzt in {n}"
     if snapshots:
-        _save_snapshot(data_dir, now, raw_store, books)
+        try:  # Rohdaten sind Beiwerk: duerfen nie den Lauf (und damit den Commit) blockieren
+            _save_snapshot(data_dir, now, raw_store, books)
+        except Exception as exc:
+            log.warning("Schnappschuss nicht gespeichert: %r", exc)
     summary = _summary(now, matched, rows, rejections, decisions_all, settled, funds, lookup)
+    for f in funds.values():  # Geldkurse (``mark``) der offenen Positionen fortschreiben
+        if f.positions:
+            f.save()
     _save_summary(data_dir, summary)
     print(f"Scan {iso(now)}: {len(rows)} Beobachtungen {summary['matched_quality']}, "
           f"Buecher {len(books)}, Ablehnungen {sum(rejections.values())}, abgerechnet {settled}")
@@ -402,7 +409,8 @@ def _save_snapshot(data_dir: Path, now: datetime, raw_store: dict, books: dict) 
         "yes_asks": [[str(l.price), str(l.size)] for l in b.yes_asks],
         "no_asks": [[str(l.price), str(l.size)] for l in b.no_asks],
         "yes_bids": [[str(l.price), str(l.size)] for l in b.yes_bids],
-        "no_bids": [[str(l.price), str(l.size)] for l in b.no_bids]} for (p, i), b in books.items()})
+        "no_bids": [[str(l.price), str(l.size)] for l in b.no_bids]}
+        for (p, i), b in books.items() if b is not None})  # None: Buch nicht lesbar (z. B. 404)
     with gzip.open(d / f"{now:%Y%m%dT%H%M%S}.json.gz", "wt", encoding="utf-8") as fh:
         json.dump(raw_store, fh)
     cutoff = now - timedelta(days=SNAPSHOT_DAYS)
@@ -435,11 +443,20 @@ def _summary(now, matched, rows, rejections, decisions, settled, funds, lookup) 
     def best(key):
         vals = [float(r[key]) for r in rows if r[key] != "" and r["quelle"] == "buch"]
         return round(max(vals), 4) if vals else None
-    navs = {}
+    navs, hanging = {}, {}
+    q = Decimal("0.01")
     for n, f in funds.items():
         nav, flagged = f.nav(lookup)
-        navs[n] = {"nav": str(nav.quantize(Decimal("0.01"))), "cash": str(f.cash.quantize(Decimal("0.01"))),
-                   "offen": len(f.positions), "ohne_bid": flagged}
+        realized, open_cost = f.pnl_split()
+        navs[n] = {"nav": str(nav.quantize(q)), "cash": str(f.cash.quantize(q)),
+                   "offen": len(f.positions), "ohne_bid": flagged, "start": str(f.start),
+                   "gruppe": f.profile.gruppe, "realisiert": str(realized.quantize(q)),
+                   "unrealisiert": str((nav - f.cash - open_cost).quantize(q))}
+        late = [k for k, p in f.positions.items() if p["settle_time"] < iso(now - HANGING_AFTER)]
+        if late:
+            hanging[n] = late
+            log.warning("Fonds %s: %d Positionen seit ueber 24 h nach Abrechnungszeit offen: %s",
+                        n, len(late), ", ".join(late[:5]))
     return {
         "time": iso(now),
         "matched": len(matched),
@@ -461,6 +478,7 @@ def _summary(now, matched, rows, rejections, decisions, settled, funds, lookup) 
         "decisions": dict(decisions),
         "settled": settled,
         "funds": navs,
+        "haengend": hanging,
         "best_edges_book": {k: best(k) for k in ("edge_huelle_roh", "edge_huelle_hedge", "edge_modell_roh",
                                                  "edge_modell_hedge", "edge_punkt_roh")},
         "top_edges": [dict({k: r[k] for k in ("asset", "platform", "id", "direction", "lower", "upper",
@@ -489,14 +507,56 @@ def _save_summary(data_dir: Path, summary: dict) -> None:
 VERLAUF_FIELDS = ["time", "matched", "with_model_band", "median_width_huelle", "median_width_modell",
                   "median_hedge_model", "pos_modell_hedge_buch", "pos_modell_hedge_liste", "trades",
                   "settled", "best_huelle_hedge", "best_modell_roh", "best_modell_hedge"] + \
-                 [f"nav_{n}" for n in FUNDS]
+                 [f"nav_{n}" for n in FUND_KEYS]
+
+
+def append_csv_row(path: Path, fields: list, row: dict) -> None:
+    """Haengt eine Zeile an. Fehlen der vorhandenen Datei Spalten (z. B. neue Fonds), wird die
+    Kopfzeile einmal erweitert; alte Zeilen bleiben, ihre neuen Zellen leer."""
+    head = []
+    if path.exists():
+        with path.open(newline="", encoding="utf-8") as fh:
+            head = next(csv.reader(fh), [])
+    if head and any(c not in head for c in fields):
+        with path.open(newline="", encoding="utf-8") as fh:
+            old_rows = list(csv.DictReader(fh))
+        head = head + [c for c in fields if c not in head]
+        tmp = path.with_name(path.name + ".tmp")
+        with tmp.open("w", newline="", encoding="utf-8") as fh:
+            w = csv.DictWriter(fh, fieldnames=head, extrasaction="ignore")
+            w.writeheader()
+            w.writerows(old_rows)
+        tmp.replace(path)
+    with path.open("a", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=head or fields)
+        if not head:
+            w.writeheader()
+        w.writerow(row)
+
+
+def _base_only(counts: dict) -> int:
+    """Summe nur ueber die 100-USD-Fonds (Schluessel "fonds" oder "fonds:..."), damit Spalten wie
+    ``trades`` mit der Zeit vor den Groessenstufen vergleichbar bleiben."""
+    return sum(v for k, v in counts.items() if k.split(":")[0] in FUNDS)
+
+
+def _fund_lines(funds: dict) -> list:
+    """Je Groessenstufe eine Zeile fuer den Tagesbericht."""
+    out = []
+    for suffix, start in SIZES.items():
+        parts = [f"{b}{' [Vergleich]' if FUNDS[b].gruppe == 'vergleich' else ''} NAV {v['nav']} (Kasse {v['cash']}, offen {v['offen']})"
+                 for b in FUNDS if (v := funds.get(b + suffix))]
+        if parts:
+            out.append(f"- Fonds {start:,} USD: ".replace(",", ".") + "; ".join(parts))
+    return out
 
 
 def write_daily(data_dir: Path, s: dict) -> Path:
     d = data_dir / "berichte"
     d.mkdir(parents=True, exist_ok=True)
     day = s["time"][:10]
-    trades = sum(v for k, v in s["decisions"].items() if ":BUY" in k)
+    buys = {k: v for k, v in s["decisions"].items() if ":BUY" in k}
+    trades = _base_only(buys)
     lines = [f"## Lauf {s['time']}", "",
              f"- Zugeordnet: {s['matched']} ({s['matched_quality']}); je Basiswert/Plattform: "
              f"{s['matched_asset_platform']}; Arten: {s['matched_direction']}",
@@ -506,9 +566,9 @@ def write_daily(data_dir: Path, s: dict) -> Path:
              f"Median-Hedgekosten je Kontrakt {s['median_hedge_model']} USD",
              f"- Positive Kanten (Anzahl Maerkte; 'liste' = Kurse der Marktliste, nur Hinweis): "
              f"{s['positive_edges'] or 'keine'}",
-             f"- Orderbuecher geprueft: {s['books']}; Papier-Kaeufe: {trades}; abgerechnet: {s['settled']}",
-             "- Fonds: " + "; ".join(f"{n} NAV {v['nav']} (Kasse {v['cash']}, offen {v['offen']})"
-                                     for n, v in s["funds"].items()),
+             f"- Orderbuecher geprueft: {s['books']}; Papier-Kaeufe 100-USD-Fonds: {trades} "
+             f"(alle Stufen: {sum(buys.values())}); abgerechnet: {s['settled']}",
+             *_fund_lines(s["funds"]),
              f"- Ablehnungen: {dict(sorted(s['rejections'].items(), key=lambda kv: -kv[1]))}", "",
              "| Basiswert | Plattform | Markt | Art | Qualitaet | p_mid | Modellband | JA-Ask | NEIN-Ask | "
              "Hedge | Kante roh | Kante n. Hedge | Quelle |", "|" + "---|" * 13]
@@ -521,28 +581,23 @@ def write_daily(data_dir: Path, s: dict) -> Path:
                                      "Kanten in Wahrscheinlichkeitspunkten (0,01 = 1 Punkt).\n\n")
     with path.open("a", encoding="utf-8") as fh:
         fh.write(head + "\n".join(lines) + "\n\n")
-    vpath = d / "verlauf.csv"
-    new = not vpath.exists()
-    with vpath.open("a", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=VERLAUF_FIELDS)
-        if new:
-            w.writeheader()
-        w.writerow({"time": s["time"], "matched": s["matched"], "with_model_band": s["with_model_band"],
+    append_csv_row(d / "verlauf.csv", VERLAUF_FIELDS, {
+                    "time": s["time"], "matched": s["matched"], "with_model_band": s["with_model_band"],
                     "median_width_huelle": s["median_width_huelle"],
                     "median_width_modell": s["median_width_modell"],
                     "median_hedge_model": s["median_hedge_model"],
                     "pos_modell_hedge_buch": s["positive_edges"].get("edge_modell_hedge:buch", 0),
                     "pos_modell_hedge_liste": s["positive_edges"].get("edge_modell_hedge:liste", 0),
-                    "trades": trades, "settled": sum(s["settled"].values()),
+                    "trades": trades, "settled": _base_only(s["settled"]),
                     "best_huelle_hedge": s["best_edges_book"]["edge_huelle_hedge"],
                     "best_modell_roh": s["best_edges_book"]["edge_modell_roh"],
                     "best_modell_hedge": s["best_edges_book"]["edge_modell_hedge"],
-                    **{f"nav_{n}": v["nav"] for n, v in s["funds"].items()}})
+                    **{f"nav_{n}": v["nav"] for n, v in s["funds"].items() if n in FUND_KEYS}})
     return path
 
 
 def report(data_dir: Path) -> int:
-    for name in FUNDS:
+    for name in FUND_KEYS:
         f = Fund(name, data_dir)
         nav, flagged = f.nav(book_for_position)
         print(f"Fonds {name}: NAV {nav:.2f} USD (Kasse {f.cash:.2f}, Start {f.start}), "

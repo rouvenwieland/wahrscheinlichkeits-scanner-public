@@ -97,6 +97,9 @@ def estimate_clock(ticks_ms: Sequence[int], closes: Sequence[float], shrink: flo
     return VarianceClock(tuple(x / m for x in raw), source)
 
 
+MAX_REL_DOWN = 0.3  # theta_min >= 70 % des kleineren Uhr-Werts
+
+
 def theta_range(clock: VarianceClock, t0: datetime, t: datetime, t1: datetime,
                 margin: float = 0.05) -> tuple:
     """(theta_flach, theta_uhr, theta_min, theta_max) fuer das Modellband.
@@ -105,12 +108,16 @@ def theta_range(clock: VarianceClock, t0: datetime, t: datetime, t1: datetime,
     (z. B. US-Daten um 12:30 UTC), die keine Uhr kennt. Der Zuschlag ist ``margin`` in
     der Mitte und schrumpft zu den Verfaellen hin (Faktor 2*sqrt(theta*(1-theta))),
     weil dort fast die ganze Varianz schon feststeht.
+
+    Nach unten hoechstens ``MAX_REL_DOWN`` relativ: Der absolute Zuschlag wuerde bei kleinem
+    theta (Vorlauf, wenige Stunden) theta_min auf etwa 0 druecken, also eine Varianz von fast 0
+    unterstellen (Reparatur 27.10.2026: Modellband 0 bis 1 bei Spannen um den Kassakurs).
     """
     tf = FLAT.theta(t0, t, t1)
     tc = clock.theta(t0, t, t1)
     c = 0.5 * (tf + tc)
     m = margin * 2.0 * math.sqrt(max(c * (1.0 - c), 0.0))
-    lo = max(0.0, min(tf, tc) - m)
+    lo = max(0.0, min(tf, tc) - m, min(tf, tc) * (1.0 - MAX_REL_DOWN))
     hi = min(1.0, max(tf, tc) + m)
     return tf, tc, lo, hi
 

@@ -61,10 +61,21 @@ def _t(s: str):
 # ---------------------------------------------------------------- Format
 
 def num(x, nd=2, sign=False):
+    """Deutsche Zahl: Komma als Dezimaltrenner, Punkt als Tausendertrenner, echtes Minuszeichen."""
     if x is None:
         return "–"
-    s = f"{x:+.{nd}f}" if sign else f"{x:.{nd}f}"
-    return s.replace("-", "−").replace(".", ",")
+    s = f"{x:+,.{nd}f}" if sign else f"{x:,.{nd}f}"
+    return s.replace("-", "−").replace(",", "\0").replace(".", ",").replace("\0", ".")
+
+
+def cadence_text(hist: list) -> str:
+    """Tatsaechlicher Laufabstand aus den letzten Laeufen (GitHub drosselt Zeitplaene)."""
+    ts = [t for t in (_t(r.get("time")) for r in hist[-24:]) if t]
+    gaps = sorted((b - a).total_seconds() / 3600 for a, b in zip(ts, ts[1:]) if b > a)
+    if not gaps:
+        return "Läufe automatisch auf GitHub"
+    med = gaps[len(gaps) // 2]
+    return f"Läufe auf GitHub, zuletzt etwa alle {med:.0f} Stunden" if med >= 1.5 else "Läufe auf GitHub, etwa stündlich"
 
 
 def pts(x, sign=True):
@@ -203,7 +214,7 @@ def render(data_dir: Path) -> str:
              '<p class="lede">Prognosemärkte von Kalshi und Polymarket gegen risikoneutrale Wahrscheinlichkeiten '
              'aus Deribit-Optionen für BTC, ETH, SOL und XRP.</p>'
              f'<p class="meta">Stand {local(now)} Uhr · {runs} {"Lauf" if runs == 1 else "Läufe"} seit '
-             f'{first.astimezone(BERLIN).strftime("%d.%m.%Y")} · Lauf alle 2 Stunden auf GitHub</p></header>')
+             f'{first.astimezone(BERLIN).strftime("%d.%m.%Y")} · {cadence_text(hist)}</p></header>')
 
     # Lage
     h.append('<section class="status" aria-label="Lage">')
@@ -238,45 +249,53 @@ def render(data_dir: Path) -> str:
              f'{sparkline([_f(r.get("matched")) for r in hist])}</figure>'
              '</div></section>')
 
-    # Fonds
-    h.append('<section class="block"><div class="head"><h2>Beispielfonds</h2>'
-             '<p>Je 100 USD Start, gleiche Märkte, verschiedene Regeln. Bewertung nur zu ausführbaren Geldkursen.</p></div>'
-             '<ol class="funds">')
-    for f in funds:
-        pr, st = f["pr"], f["state"]
-        nav = f["nav"]
-        chg = None if nav is None else nav - START
-        cls = "good" if chg and chg > 0.005 else ("bad" if chg and chg < -0.005 else "neutral")
-        buys = sum(1 for t in f["trades"] if t.get("kind") == "BUY")
-        sells = sum(1 for t in f["trades"] if t.get("kind") == "SETTLE")
-        wins = sum(1 for t in f["trades"] if t.get("kind") == "SETTLE" and _f(t.get("cash_flow")) and _f(t["cash_flow"]) > 0)
-        rule = {"arb": "Arbitrageband", "huelle": "Hülle", "modell": "Modellband", "punkt": "Punktschätzung"}[pr.band]
-        tags = [rule, "mit Hedge-Kosten" if pr.hedge else "ohne Hedge-Kosten", f"Hürde {num(100 * float(pr.min_edge), 0)} Pkt"]
-        h.append('<li class="fund">')
-        h.append(f'<div class="fname"><h3>{escape(pr.label)}</h3><p class="tags">{" · ".join(tags)}</p>'
-                 f'<p class="desc">{escape(pr.desc)}</p></div>')
-        h.append(f'<div class="fnav"><span class="mono big">{num(nav)}</span><span class="unit">USD</span>'
-                 f'<span class="chip {cls} mono">{num(chg, 2, True)}</span></div>')
-        h.append(f'<div class="fspark">{sparkline(f["nav_hist"] or [START], base=START)}</div>')
-        h.append(f'<dl class="facts"><div><dt>Kasse</dt><dd class="mono">{num(_f(st.get("cash")))}</dd></div>'
-                 f'<div><dt>offen</dt><dd class="mono">{len(st.get("positions", {}))}</dd></div>'
-                 f'<div><dt>Käufe</dt><dd class="mono">{buys}</dd></div>'
-                 f'<div><dt>abgerechnet</dt><dd class="mono">{sells}{f" ({wins} gewonnen)" if sells else ""}</dd></div></dl>')
-        pos = list(st.get("positions", {}).values())
-        if pos:
-            h.append(f'<details><summary>{len(pos)} offene Positionen</summary><div class="scroll"><table>'
-                     '<thead><tr><th>Markt</th><th>Seite</th><th class="r">Anteile</th><th class="r">Kosten</th>'
-                     '<th>Abrechnung</th></tr></thead><tbody>')
-            for p in sorted(pos, key=lambda p: p.get("settle_time", "")):
-                ts = _t(p.get("settle_time", ""))
-                lbl = market_label({"direction": p.get("direction"), "lower": p.get("lower"), "upper": p.get("upper")})
-                h.append(f'<tr><td>{escape(p.get("asset", ""))} {escape(lbl)}<br><span class="id">{escape(p.get("platform", ""))} '
-                         f'{escape(str(p.get("market_id", "")))}</span></td><td>{"JA" if p.get("side") == "yes" else "NEIN"}</td>'
-                         f'<td class="r mono">{escape(str(p.get("shares", "")))}</td>'
-                         f'<td class="r mono">{num(_f(p.get("cost")))}</td><td class="mono">{local(ts) if ts else "–"}</td></tr>')
-            h.append("</tbody></table></div></details>")
-        h.append("</li>")
-    h.append("</ol></section>")
+    # Fonds, getrennt: Kernstrategie und Vergleichsgruppe (ungesicherte Wetten)
+    for gruppe, (title, intro) in GROUP_TEXT.items():
+        members = [f for f in funds if f["pr"].gruppe == gruppe]
+        h.append(f'<section class="block group {gruppe}"><div class="head"><h2>{escape(title)}</h2>'
+                 f'<p>{intro}</p></div><ol class="funds">')
+        for f in members:
+            pr, st = f["pr"], f["state"]
+            nav = f["nav"]
+            chg = None if nav is None else nav - START
+            cls = "good" if chg and chg > 0.005 else ("bad" if chg and chg < -0.005 else "neutral")
+            buys = sum(1 for t in f["trades"] if t.get("kind") == "BUY")
+            sells = sum(1 for t in f["trades"] if t.get("kind") == "SETTLE")
+            wins = sum(1 for t in f["trades"] if t.get("kind") == "SETTLE" and _f(t.get("cash_flow")) and _f(t["cash_flow"]) > 0)
+            rule = {"arb": "Arbitrageband", "huelle": "Hülle", "modell": "Modellband", "punkt": "Punktschätzung"}[pr.band]
+            tags = [rule, "mit Hedge-Kosten" if pr.hedge else "ohne Hedge-Kosten", f"Hürde {num(100 * float(pr.min_edge), 0)} Pkt"]
+            h.append('<li class="fund">')
+            h.append(f'<div class="fname"><h3>{escape(pr.label)}</h3><p class="tags">{" · ".join(tags)}</p>'
+                     f'<p class="desc">{escape(pr.desc)}</p></div>')
+            h.append(f'<div class="fnav"><span class="mono big">{num(nav)}</span><span class="unit">USD</span>'
+                     f'<span class="chip {cls} mono">{num(chg, 2, True)}</span></div>')
+            h.append(f'<div class="fspark">{sparkline(f["nav_hist"] or [START], base=START)}</div>')
+            h.append(f'<dl class="facts"><div><dt>Kasse</dt><dd class="mono">{num(_f(st.get("cash")))}</dd></div>'
+                     f'<div><dt>offen</dt><dd class="mono">{len(st.get("positions", {}))}</dd></div>'
+                     f'<div><dt>Käufe</dt><dd class="mono">{buys}</dd></div>'
+                     f'<div><dt>abgerechnet</dt><dd class="mono">{sells}{f" ({wins} gewonnen)" if sells else ""}</dd></div></dl>')
+            tier = (last.get("funds", {}) or {})
+            own = tier.get(f["name"]) or {}
+            big = [(lbl, tier.get(f["name"] + suf)) for suf, lbl in (("_1k", "1.000 USD"), ("_10k", "10.000 USD"))]
+            h.append('<p class="tiers">' + " · ".join(
+                [f'realisiert <b class="mono">{num(_f(own.get("realisiert")), 2, True)}</b>',
+                 f'offen bewertet <b class="mono">{num(_f(own.get("unrealisiert")), 2, True)}</b>']
+                + [f'{lbl}: <b class="mono">{num(_f(v.get("nav")))}</b>' for lbl, v in big if v]) + "</p>")
+            pos = list(st.get("positions", {}).values())
+            if pos:
+                h.append(f'<details><summary>{len(pos)} offene Positionen</summary><div class="scroll"><table>'
+                         '<thead><tr><th>Markt</th><th>Seite</th><th class="r">Anteile</th><th class="r">Kosten</th>'
+                         '<th>Abrechnung</th></tr></thead><tbody>')
+                for p in sorted(pos, key=lambda p: p.get("settle_time", "")):
+                    ts = _t(p.get("settle_time", ""))
+                    lbl = market_label({"direction": p.get("direction"), "lower": p.get("lower"), "upper": p.get("upper")})
+                    h.append(f'<tr><td>{escape(p.get("asset", ""))} {escape(lbl)}<br><span class="id">{escape(p.get("platform", ""))} '
+                             f'{escape(str(p.get("market_id", "")))}</span></td><td>{"JA" if p.get("side") == "yes" else "NEIN"}</td>'
+                             f'<td class="r mono">{escape(str(p.get("shares", "")))}</td>'
+                             f'<td class="r mono">{num(_f(p.get("cost")))}</td><td class="mono">{local(ts) if ts else "–"}</td></tr>')
+                h.append("</tbody></table></div></details>")
+            h.append("</li>")
+        h.append("</ol></section>")
 
     # Kanten
     top = last.get("top_edges", []) or []
@@ -329,6 +348,17 @@ def render(data_dir: Path) -> str:
     return "\n".join(h)
 
 
+GROUP_TEXT = {
+    "kern": ("Kernstrategie: Fonds mit Hedge-Kosten",
+             "Kaufen nur, wenn der Kurs nach Gebühr <b>und</b> nach den Kosten einer Deribit-Absicherung "
+             "außerhalb des Bands liegt und die Position groß genug zum Absichern ist. Je 100 USD Start, "
+             "Bewertung zu ausführbaren Geldkursen."),
+    "vergleich": ("Vergleich: ungesicherte Wette",
+                  "Bewusst ohne Absicherung, als Vergleichsgruppe: Sie zeigen, was Band und Absicherung "
+                  "gegenüber naivem Wetten bringen. Hier sind Einzelverluste normal; ein einzelnes billiges "
+                  "Los kann die Kurve dominieren. Gleiche Kosten- und Positionsregeln wie oben."),
+}
+
 PLATFORM = {"kalshi": "Kalshi", "polymarket": "Polymarket"}
 QUALITY = {"exakt": "exakt zum Verfall", "interpoliert": "zwischen zwei Verfällen", "vorlauf": "vor dem ersten Verfall"}
 
@@ -361,9 +391,11 @@ das Band. Es ist schmal, gilt aber nur, wenn die Annahmen stimmen.</p>
 <p><b>Hedge-Kosten.</b> Was es kosten würde, die Wette bei Deribit mit einem Spread abzusichern:
 Gebühren, Geld-Brief-Spanne und das Schließen zum Abrechnungszeitpunkt. Das ist ein Kostenfilter,
 kein abgesicherter Gewinn.</p>
-<p><b>Beispielfonds.</b> Alle handeln nur auf Papier und unabgesichert, höchstens 5&thinsp;% des Fonds
-und 10&thinsp;USD je Kauf, und halten bis zur offiziellen Abrechnung. Die naiven Fonds zeigen, wie
-es ohne ehrliche Kosten aussähe.</p>
+<p><b>Beispielfonds.</b> Alle handeln nur auf Papier, höchstens 5&thinsp;% des Fonds und 10&thinsp;USD
+je Kauf, je Basiswert und Abrechnungstag höchstens 10&thinsp;%, je Basiswert 25&thinsp;% (viele Schwellen
+desselben Verfalls sind eine einzige Wette). Gekauft wird zum Brief plus Gebühr, bewertet zum Geldkurs
+(sonst zum letzten gesehenen), gehalten bis zur offiziellen Abrechnung. Seit 27.10.2026 nachgerechnet
+mit der korrigierten Logik; die alten Werte liegen im Archiv.</p>
 </div><p class="fine">Daten: öffentliche Schnittstellen von Deribit, Kalshi und Polymarket, ohne Konto.
 Wahrscheinlichkeiten sind risikoneutral und können von den echten abweichen. Prognosemärkte sind in
 Deutschland rechtlich problematisch; dieses Projekt ist Forschung.</p></section>"""
@@ -470,6 +502,9 @@ th, td { text-align: left; padding: 6px 10px 6px 0; border-bottom: 1px solid var
 .method .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px 28px; }
 .method .cols p { max-width: 62ch; font-size: 0.9rem; }
 .fine { max-width: 80ch; }
+.tiers { grid-column: 1 / -1; color: var(--muted); font-size: 0.84rem; }
+.tiers b { color: var(--ink); font-weight: 500; }
+.group.vergleich .head { border-bottom-style: dashed; }
 @media (max-width: 760px) {
   .fund { grid-template-columns: minmax(0, 1fr) auto; }
   .fspark, .facts { grid-column: 1 / -1; }

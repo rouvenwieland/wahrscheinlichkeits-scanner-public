@@ -2,6 +2,7 @@
 import csv
 import json
 from datetime import datetime, timezone
+from decimal import Decimal
 
 import pytest
 
@@ -9,6 +10,7 @@ from scanner import deribit, kalshi, polymarket, run
 from scanner.http import FetchError
 
 NOW = datetime(2026, 10, 15, 18, 50, tzinfo=timezone.utc)
+REAL_BOOK_FOR_POSITION = run.book_for_position  # vor dem Ersetzen durch die Fixture merken
 INDEX = {"btc_usd": 82300.0, "eth_usd": 2447.0, "sol_usd": 105.8, "xrp_usd": 1.341}
 
 
@@ -116,6 +118,53 @@ def test_public_mode_writes_no_snapshots(offline, tmp_path):
     assert run.observation_path(tmp_path, NOW).exists()
 
 
+def _open_polymarket_position(tmp_path, market_id="9990001"):
+    """Fonds 'punkt' mit einer offenen Polymarket-Position (Markt abgelaufen, noch nicht abgerechnet)."""
+    pos = {"platform": "polymarket", "market_id": market_id, "ticker": None,
+           "yes_token": "tok-yes", "no_token": "tok-no", "side": "yes", "shares": "10",
+           "cost": "1.0", "threshold": 80000.0, "settle_time": "2026-10-15T16:00:00Z",
+           "asset": "BTC", "direction": "above", "lower": 80000.0, "upper": None,
+           "quality": "vorlauf", "band": "punkt", "hedge_cost": 0.0}
+    state = {"name": "punkt", "start": "100", "cash": "100",
+             "positions": {f"polymarket:{market_id}": pos}}
+    (tmp_path / "fund_punkt.json").write_text(json.dumps(state), encoding="utf-8")
+    return f"polymarket:{market_id}"
+
+
+def test_snapshot_survives_closed_polymarket_book(offline, monkeypatch, tmp_path):
+    """CI-Fund 17.10.2026: geschlossener Polymarket-Markt -> CLOB-Buch HTTP 404 -> Buch None.
+
+    Der Rohdaten-Schnappschuss darf daran nicht scheitern (sonst bricht jeder Lauf ab und
+    der Commit-Schritt, also auch die Abrechnung, wird nie erreicht)."""
+    key = _open_polymarket_position(tmp_path)
+
+    def closed(yes_token, no_token):
+        raise FetchError("HTTP 404 bei https://clob.polymarket.com/book")
+
+    monkeypatch.setattr(polymarket, "fetch_book", closed)
+    monkeypatch.setattr(run, "book_for_position", REAL_BOOK_FOR_POSITION)
+    s = run.scan(tmp_path, NOW, snapshots=True)
+    assert s["matched"] > 0
+    assert key in run.Fund("punkt", tmp_path).positions  # nicht abgerechnet, nur nicht bewertbar
+    snaps = sorted((tmp_path / "snapshots").glob("*.json.gz"))
+    assert snaps, "Schnappschuss fehlt"
+    import gzip
+    raw = json.load(gzip.open(snaps[-1], "rt", encoding="utf-8"))
+    assert raw["books"] and key not in raw["books"]
+
+
+def test_snapshot_failure_does_not_abort_scan(offline, monkeypatch, tmp_path, caplog):
+    def broken(*a, **kw):
+        raise OSError("Platte voll")
+
+    monkeypatch.setattr(run, "_save_snapshot", broken)
+    with caplog.at_level("WARNING", logger="scanner"):
+        s = run.scan(tmp_path, NOW, snapshots=True)
+    assert s["matched"] > 0
+    assert run.observation_path(tmp_path, NOW).exists()
+    assert "Schnappschuss" in caplog.text
+
+
 def test_dashboard_renders_from_scan(offline, tmp_path):
     import sys
     from pathlib import Path
@@ -152,3 +201,55 @@ def test_public_export_excludes_deribit_data(tmp_path):
     assert not any(k.startswith(("data/", "deploy/")) for k in plan)
     public_wf = (root / "deploy" / "public" / "scan.yml").read_text(encoding="utf-8")
     assert "--no-snapshots" in public_wf and "upload-artifact" not in public_wf
+
+
+def test_size_tiers_in_last_scan_and_verlauf(offline, tmp_path):
+    s = run.scan(tmp_path, NOW)
+    run.write_daily(tmp_path, s)
+    last = json.loads((tmp_path / "last_scan.json").read_text(encoding="utf-8"))
+    assert list(last["funds"]) == list(run.FUND_KEYS)
+    for key, (base, start) in run.FUND_KEYS.items():
+        v = last["funds"][key]
+        assert {"nav", "cash", "offen", "ohne_bid", "start"} <= set(v)
+        assert isinstance(v["nav"], str) and isinstance(v["cash"], str) and Decimal(v["start"]) == start
+        assert run.Fund(key, tmp_path).invariant_ok()
+    buys = {k for k in s["decisions"] if ":BUY" in k}
+    if any(k.startswith("punkt:") for k in buys):  # gleiche Regeln: die grossen Stufen kaufen mit
+        assert any(k.startswith("punkt_10k:") for k in buys)
+        assert run.Fund("punkt_10k", tmp_path).cash < 10000
+    head = next(csv.reader(open(tmp_path / "berichte" / "verlauf.csv", encoding="utf-8")))
+    assert head == run.VERLAUF_FIELDS and {"nav_punkt_1k", "nav_streng_10k"} <= set(head)
+    obs = list(csv.DictReader(open(run.observation_path(tmp_path, NOW), encoding="utf-8")))
+    assert "decision_punkt_1k" not in obs[0]  # Beobachtungen nur fuer die 100-USD-Fonds
+
+
+def test_verlauf_gets_new_columns_without_losing_old_rows(tmp_path):
+    """Bestehende verlauf.csv (vor den Groessenstufen): Kopfzeile wird erweitert, alte Zeilen bleiben."""
+    path = tmp_path / "verlauf.csv"
+    old_head = ["time", "trades", "nav_punkt"]
+    with path.open("w", newline="", encoding="utf-8") as fh:
+        csv.writer(fh).writerows([old_head, ["2026-10-16T15:23:17Z", "29", "96.16"]])
+    new_fields = old_head + ["nav_punkt_1k", "nav_punkt_10k"]
+    run.append_csv_row(path, new_fields, {"time": "2026-10-21T10:00:00Z", "trades": "1", "nav_punkt": "101.00",
+                                          "nav_punkt_1k": "1010.00", "nav_punkt_10k": "10100.00"})
+    run.append_csv_row(path, new_fields, {"time": "2026-10-21T12:00:00Z", "trades": "0", "nav_punkt": "102.00",
+                                          "nav_punkt_1k": "1020.00", "nav_punkt_10k": "10200.00"})
+    rows = list(csv.DictReader(open(path, encoding="utf-8")))
+    assert next(csv.reader(open(path, encoding="utf-8"))) == new_fields
+    assert rows[0] == {"time": "2026-10-16T15:23:17Z", "trades": "29", "nav_punkt": "96.16",
+                       "nav_punkt_1k": "", "nav_punkt_10k": ""}
+    assert [r["nav_punkt_10k"] for r in rows] == ["", "10100.00", "10200.00"]
+    assert not list(tmp_path.glob("*.tmp"))
+
+
+def test_dashboard_german_number_format_and_cadence():
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(run.__file__).resolve().parent.parent / "dashboard"))
+    import render_dashboard as rd
+    assert rd.num(10000) == "10.000,00" and rd.num(1234.5, 1, True) == "+1.234,5"
+    assert rd.num(-0.3, 1) == "−0,3" and rd.num(None) == "–"
+    hist = [{"time": f"2026-10-30T{h:02d}:00:00Z"} for h in (0, 6, 12, 18)]
+    assert "alle 6 Stunden" in rd.cadence_text(hist)
+    assert "stündlich" in rd.cadence_text([{"time": f"2026-10-30T0{h}:00:00Z"} for h in range(4)])
+    assert rd.cadence_text([]) == "Läufe automatisch auf GitHub"

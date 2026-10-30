@@ -187,3 +187,9 @@ def test_eth_and_sol_fixtures_build_slices(deribit_fixture):
         assert len(sls) >= 5 and all(lo < s.F < hi for s in sls)
         s = sls[2]
         assert any(b is not None for b in s.put_bid) and any(b is not None for b in s.call_bid)
+
+
+def test_get_json_reuses_one_session(monkeypatch):
+    from scanner import http
+    patch_get(monkeypatch, [FakeResp(200, {"ok": 1})])
+    assert http._shared_session() is http._shared_session()

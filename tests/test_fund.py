@@ -81,7 +81,7 @@ def test_polymarket_min_size_respected(tmp_path):
     # nur 3 Anteile in der Tiefe -> unter orderMinSize 5 -> kein Trade
     d = f.consider(market("polymarket", min_size=5), "exakt", est(0.8, 0.9),
                    book(yes_asks=[lv("0.30", 3)]), NOW, f.cash, hedge=HEDGE_FREI)
-    assert d == "SKIP:keine_kante" and not f.positions
+    assert d == "SKIP:zu_duenn" and not f.positions
     d = f.consider(market("polymarket", min_size=5), "exakt", est(0.8, 0.9),
                    book(yes_asks=[lv("0.30", 30)]), NOW, f.cash, hedge=HEDGE_FREI)
     assert d == "BUY_YES"
@@ -113,12 +113,17 @@ def test_mark_to_market_uses_bids_only(tmp_path):
     f = Fund("streng", tmp_path)
     f.consider(market(), "exakt", est(0.8, 0.9), book(yes_asks=[lv("0.30", 100)]), NOW, f.cash, hedge=HEDGE_FREI)
     shares = D(f.positions["kalshi:M1"]["shares"])
+    nav, flagged = f.nav(lambda p: None)  # noch nie ein Bid gesehen -> 0
+    assert nav == f.cash and flagged == 1
     nav, flagged = f.nav(lambda p: book(yes_bids=[lv("0.40", 1000)]))
     assert nav == f.cash + shares * D("0.40") and flagged == 0
-    nav, flagged = f.nav(lambda p: book(yes_asks=[lv("0.99", 5)]))  # kein Bid -> Wert 0
-    assert nav == f.cash and flagged == 1
+    # Regression 27.10.2026: kein Bid (Markt geschlossen, Buch leer/nicht lesbar) -> letzter Geldkurs, nicht 0
+    nav, flagged = f.nav(lambda p: book(yes_asks=[lv("0.99", 5)]))
+    assert nav == f.cash + shares * D("0.40") and flagged == 1
     nav, flagged = f.nav(lambda p: None)
-    assert nav == f.cash and flagged == 1
+    assert nav == f.cash + shares * D("0.40") and flagged == 1
+    f.save()
+    assert Fund("streng", tmp_path).positions["kalshi:M1"]["mark"] == "0.400000"
 
 
 def test_state_persists(tmp_path):
@@ -207,12 +212,30 @@ def test_hedge_cost_blocks_otherwise_good_trade(tmp_path):
 
 
 def test_hedge_min_size_needs_book_depth(tmp_path):
-    f = Fund("streng", tmp_path)
+    f = Fund("streng_10k", tmp_path)
     b = book(yes_asks=[lv("0.50", 20)])
     assert f.consider(market(), "exakt", est(0.70, 0.80), b, NOW, f.cash,
                       hedge=HedgeCost(0.01, 30, ())) == "SKIP:zu_duenn_fuer_hedge"
     assert f.consider(market(), "exakt", est(0.70, 0.80), b, NOW, f.cash,
                       hedge=HedgeCost(0.01, 20, ())) == "BUY_YES"
+    assert D(f.positions["kalshi:M1"]["shares"]) >= 20
+
+
+def test_hedge_fund_position_must_reach_hedge_min_size(tmp_path):
+    """Regression 27.10.2026: Fonds mit Hedge kauften 5 Anteile, obwohl Deribit mindestens n_min
+    Kontrakte verlangt; solche Positionen waren nicht absicherbar. 100 USD reichen fuer 20 Kontrakte
+    zu 0,50 nicht (Deckel 5 USD), 10.000 USD schon."""
+    b = book(yes_asks=[lv("0.50", 1000)])
+    small, big = Fund("modell", tmp_path), Fund("modell_10k", tmp_path)
+    e = mest(0.0, 1.0, 0.75, 0.80)
+    assert small.consider(market(), "interpoliert", e, b, NOW, small.cash,
+                          hedge=HedgeCost(0.01, 20, ())) == "SKIP:unter_hedge_mindestgroesse"
+    assert not small.positions and small.cash == 100
+    assert big.consider(market(), "interpoliert", e, b, NOW, big.cash, hedge=HedgeCost(0.01, 20, ())) == "BUY_YES"
+    assert D(big.positions["kalshi:M1"]["shares"]) >= 20
+    # Fonds ohne Hedge ignorieren die Mindestgroesse
+    raw = Fund("modell_roh", tmp_path)
+    assert raw.consider(market(), "interpoliert", e, b, NOW, raw.cash, hedge=HedgeCost(0.01, 20, ())) == "BUY_YES"
 
 
 def test_no_hedge_means_no_trade(tmp_path):
@@ -286,3 +309,53 @@ def test_example_funds_without_hedge_and_naive_point(tmp_path):
     assert pk.consider(market(mid="M4"), "interpoliert", ProbEstimate(None, 0.1, 0.9, "interpoliert"), b, NOW,
                        pk.cash, hedge=None) == "SKIP:kein_band"
     assert pk.positions["kalshi:M1"]["band"] == "punkt"
+
+
+# ------------------------------------------------------------ Groessenstufen
+
+def test_size_tiers_start_cash_and_trade_cap(tmp_path):
+    from scanner.fund import FUND_KEYS, SIZES, TRADE_CAP
+    assert list(FUND_KEYS)[:len(FUNDS)] == list(FUNDS)  # 100-USD-Fonds zuerst, Reihenfolge wie bisher
+    assert set(FUND_KEYS) == {b + s for b in FUNDS for s in ("", "_1k", "_10k")}
+    assert SIZES == {"": 100, "_1k": 1000, "_10k": 10000}
+    for key, start, cap in (("punkt", 100, 10), ("punkt_1k", 1000, 100), ("streng_10k", 10000, 1000)):
+        f = Fund(key, tmp_path)
+        assert f.start == f.cash == start and f.trade_cap == cap
+        assert f.profile is FUNDS[FUND_KEYS[key][0]] and f.trade_cap / f.start == TRADE_CAP / 100
+
+
+def test_bigger_tiers_buy_more_until_book_depth(tmp_path):
+    """Gleiche Regeln, gleicher Markt: 5 % NAV je Trade, bis das Buch zu Ende ist."""
+    b = book(yes_asks=[lv("0.50", 300)])
+    fills = {}
+    for key in ("streng", "streng_1k", "streng_10k"):
+        f = Fund(key, tmp_path)
+        assert f.consider(market(), "exakt", est(0.70, 0.80), b, NOW, f.cash, hedge=HEDGE_FREI) == "BUY_YES"
+        pos = f.positions["kalshi:M1"]
+        fills[key] = (D(pos["shares"]), D(pos["cost"]))
+        assert f.invariant_ok()
+    assert fills["streng"][1] <= 5 and fills["streng_1k"][1] <= 50  # Deckel 5 % NAV
+    assert fills["streng"][0] < fills["streng_1k"][0] < fills["streng_10k"][0]
+    assert fills["streng_10k"][0] == 300 and fills["streng_10k"][1] < 500  # Buchtiefe begrenzt
+
+
+def test_fixed_cap_scales_when_nav_cap_is_looser(tmp_path):
+    """Hohe NAV (z. B. nach Gewinnen): der feste Deckel greift, proportional zum Startkapital."""
+    b = book(yes_asks=[lv("0.50", 100_000)])
+    for key, cap in (("streng", 10), ("streng_10k", 1000)):
+        f = Fund(key, tmp_path)
+        f.consider(market(), "exakt", est(0.70, 0.80), b, NOW, f.start * 10, hedge=HEDGE_FREI)
+        cost = D(f.positions["kalshi:M1"]["cost"])
+        assert cap * D("0.98") < cost <= cap
+
+
+def test_size_tier_persists_separately(tmp_path):
+    f = Fund("modell_roh_10k", tmp_path)
+    e = ProbEstimate(0.70, 0.30, 0.95, "interpoliert", (), 0.66, 0.72)
+    assert f.consider(market(), "interpoliert", e, book(yes_asks=[lv("0.40", 5000)]), NOW, f.cash,
+                      hedge=None) == "BUY_YES"
+    assert (tmp_path / "fund_modell_roh_10k.json").exists() and (tmp_path / "trades_modell_roh_10k.csv").exists()
+    assert not (tmp_path / "fund_modell_roh.json").exists()
+    g = Fund("modell_roh_10k", tmp_path)
+    assert g.start == 10000 and g.cash == f.cash < 10000 and g.positions == f.positions and g.invariant_ok()
+    assert Fund("modell_roh", tmp_path).cash == 100 and Fund("modell_roh_1k", tmp_path).cash == 1000

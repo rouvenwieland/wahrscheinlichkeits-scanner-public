@@ -57,8 +57,10 @@ def fetch_market(market_id: str) -> dict:
 def official_result(market: dict):
     """'yes' / 'no' nur bei offizieller Aufloesung, sonst None.
 
-    Verlangt: closed, outcomePrices genau ["1","0"] bzw. ["0","1"] und
-    umaResolutionStatus == "resolved" (falls das Feld vorhanden und gefuellt ist).
+    Verlangt: closed, Ausgaenge genau ["Yes","No"] (wie bei der Zuordnung; Sport- oder
+    Mehrfachmaerkte mit Teamnamen werden hier nie abgerechnet, sie werden auch nie gekauft),
+    outcomePrices exakt 1/0 bzw. 0/1 (auch als "1.0"/"0.0") und umaResolutionStatus ==
+    "resolved" (falls das Feld vorhanden und gefuellt ist).
     """
     if market.get("closed") is not True:
         return None
@@ -66,13 +68,17 @@ def official_result(market: dict):
     if status not in (None, "") and status != "resolved":
         return None
     try:
+        outcomes = market.get("outcomes")
+        outcomes = json.loads(outcomes) if isinstance(outcomes, str) else outcomes
+        if outcomes is not None and list(outcomes) != ["Yes", "No"]:
+            return None
         prices = market.get("outcomePrices")
         prices = json.loads(prices) if isinstance(prices, str) else prices
-        prices = [str(x) for x in prices]
+        prices = [Decimal(str(x)) for x in prices]
     except Exception:
         return None
-    if prices == ["1", "0"]:
+    if prices == [1, 0]:
         return "yes"
-    if prices == ["0", "1"]:
+    if prices == [0, 1]:
         return "no"
     return None

@@ -17,6 +17,17 @@ class FetchError(RuntimeError):
     """Ein Netzwerkabruf ist endgueltig fehlgeschlagen."""
 
 
+_SESSION: requests.Session | None = None
+
+
+def _shared_session() -> requests.Session:
+    """Eine Sitzung fuer alle Abrufe eines Laufs: Verbindungen (TLS) werden wiederverwendet."""
+    global _SESSION
+    if _SESSION is None:
+        _SESSION = requests.Session()
+    return _SESSION
+
+
 def sleep(seconds: float) -> None:  # eigene Funktion, damit Tests sie ersetzen koennen
     time.sleep(seconds)
 
@@ -25,7 +36,7 @@ def get_json(url: str, params: dict | None = None, *, timeout: float = 15.0,
              retries: int = 3, backoff: float = 1.0,
              session: requests.Session | None = None) -> Any:
     """GET mit hoechstens ``retries`` Versuchen. Wirft ``FetchError`` bei Misserfolg."""
-    sess = session or requests.Session()
+    sess = session or _shared_session()
     last: Exception | None = None
     for attempt in range(retries):
         try:
