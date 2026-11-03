@@ -1,7 +1,7 @@
 {
  "name": "modell_roh_10k",
  "start": "10000",
- "cash": "10355.16147",
+ "cash": "10418.16147",
  "positions": {
   "kalshi:KXETHY-27JAN0100-B3125": {
    "platform": "kalshi",
@@ -21,7 +21,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.930650"
+   "mark": "0.953000"
   },
   "kalshi:KXETHY-27JAN0100-B1875": {
    "platform": "kalshi",
@@ -41,7 +41,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.104051"
+   "mark": "0.095675"
   },
   "kalshi:KXETHY-27JAN0100-B1625": {
    "platform": "kalshi",
@@ -61,7 +61,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.060000"
+   "mark": "0.043421"
   },
   "kalshi:KXBTCD-26NOV0617-T82499.99": {
    "platform": "kalshi",
@@ -121,27 +121,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.077000"
-  },
-  "kalshi:KXETHD-26NOV0217-T2289.99": {
-   "platform": "kalshi",
-   "market_id": "KXETHD-26NOV0217-T2289.99",
-   "ticker": "KXETHD-26NOV0217-T2289.99",
-   "yes_token": null,
-   "no_token": null,
-   "side": "no",
-   "shares": "63",
-   "cost": "59.4700",
-   "threshold": 2289.99,
-   "settle_time": "2026-11-02T22:00:00Z",
-   "asset": "ETH",
-   "direction": "above",
-   "lower": 2289.99,
-   "upper": null,
-   "quality": "vorlauf",
-   "band": "modell",
-   "hedge_cost": 0.0,
-   "mark": "0.930000"
+   "mark": "0.087000"
   },
   "kalshi:KXETHD-26NOV0617-T2439.99": {
    "platform": "kalshi",
@@ -161,7 +141,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.880000"
+   "mark": "0.890312"
   }
  }
 }
