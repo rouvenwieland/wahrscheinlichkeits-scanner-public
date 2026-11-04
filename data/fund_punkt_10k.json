@@ -1,7 +1,7 @@
 {
  "name": "punkt_10k",
  "start": "10000",
- "cash": "850.88826",
+ "cash": "613.59467",
  "positions": {
   "kalshi:KXBTCY-27JAN0100-B97500": {
    "platform": "kalshi",
@@ -21,7 +21,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.960000"
+   "mark": "0.963000"
   },
   "kalshi:KXBTCY-27JAN0100-B77500": {
    "platform": "kalshi",
@@ -41,7 +41,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.153237"
+   "mark": "0.157412"
   },
   "kalshi:KXBTCY-27JAN0100-B72500": {
    "platform": "kalshi",
@@ -81,7 +81,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.925236"
+   "mark": "0.966544"
   },
   "kalshi:KXETHY-27JAN0100-B3125": {
    "platform": "kalshi",
@@ -101,7 +101,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.928703"
+   "mark": "0.937370"
   },
   "kalshi:KXETHY-27JAN0100-B2125": {
    "platform": "kalshi",
@@ -121,7 +121,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.198000"
+   "mark": "0.199000"
   },
   "kalshi:KXETHY-27JAN0100-B1625": {
    "platform": "kalshi",
@@ -141,7 +141,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.051000"
+   "mark": "0.041000"
   },
   "kalshi:KXBTCY-27JAN0100-B82500": {
    "platform": "kalshi",
@@ -161,7 +161,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.146000"
+   "mark": "0.145000"
   },
   "kalshi:KXETHY-27JAN0100-B1875": {
    "platform": "kalshi",
@@ -181,7 +181,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.106000"
+   "mark": "0.112000"
   },
   "kalshi:KXBTCY-27JAN0100-B92500": {
    "platform": "kalshi",
@@ -201,7 +201,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.071000"
+   "mark": "0.066000"
   },
   "kalshi:KXETHD-26NOV0617-T2239.99": {
    "platform": "kalshi",
@@ -221,7 +221,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.640011"
+   "mark": "0.478650"
   },
   "kalshi:KXETHD-26NOV0617-T2199.99": {
    "platform": "kalshi",
@@ -241,7 +241,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.780000"
+   "mark": "0.640000"
   },
   "kalshi:KXBTCD-26NOV0617-T84999.99": {
    "platform": "kalshi",
@@ -281,7 +281,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.970000"
+   "mark": "0.960000"
   },
   "kalshi:KXXRPD-26NOV0617-T1.4999": {
    "platform": "kalshi",
@@ -321,7 +321,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.516577"
+   "mark": "0.724041"
   },
   "polymarket:6346648": {
    "platform": "polymarket",
@@ -341,7 +341,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.860000"
+   "mark": "0.610000"
   },
   "polymarket:6389990": {
    "platform": "polymarket",
@@ -361,7 +361,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.730000"
+   "mark": "0.540000"
   },
   "kalshi:KXSOLD-26NOV0617-T81.9999": {
    "platform": "kalshi",
@@ -381,7 +381,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.020000"
+   "mark": "0.010000"
   },
   "polymarket:6423947": {
    "platform": "polymarket",
@@ -401,7 +401,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.500000"
+   "mark": "0.590000"
   },
   "kalshi:KXXRP-26NOV0617-B1.2899500": {
    "platform": "kalshi",
@@ -421,7 +421,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.080893"
+   "mark": "0.040000"
   },
   "polymarket:6346674": {
    "platform": "polymarket",
@@ -441,7 +441,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.690000"
+   "mark": "0.910000"
   },
   "polymarket:6389979": {
    "platform": "polymarket",
@@ -461,7 +461,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.006152"
+   "mark": "0.034000"
   },
   "kalshi:KXXRPD-26NOV0617-T1.2399": {
    "platform": "kalshi",
@@ -481,7 +481,147 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.180000"
+   "mark": "0.357500"
+  },
+  "kalshi:KXBTCD-26NOV0417-T78749.99": {
+   "platform": "kalshi",
+   "market_id": "KXBTCD-26NOV0417-T78749.99",
+   "ticker": "KXBTCD-26NOV0417-T78749.99",
+   "yes_token": null,
+   "no_token": null,
+   "side": "no",
+   "shares": "51",
+   "cost": "48.1500",
+   "threshold": 78749.99,
+   "settle_time": "2026-11-04T22:00:00Z",
+   "asset": "BTC",
+   "direction": "above",
+   "lower": 78749.99,
+   "upper": null,
+   "quality": "interpoliert",
+   "band": "punkt",
+   "hedge_cost": 0.0,
+   "mark": "0.930000"
+  },
+  "kalshi:KXBTC-26NOV0417-B76375": {
+   "platform": "kalshi",
+   "market_id": "KXBTC-26NOV0417-B76375",
+   "ticker": "KXBTC-26NOV0417-B76375",
+   "yes_token": null,
+   "no_token": null,
+   "side": "yes",
+   "shares": "6",
+   "cost": "0.3200",
+   "threshold": 76250.0,
+   "settle_time": "2026-11-04T22:00:00Z",
+   "asset": "BTC",
+   "direction": "range",
+   "lower": 76250.0,
+   "upper": 76499.99,
+   "quality": "interpoliert",
+   "band": "punkt",
+   "hedge_cost": 0.0,
+   "mark": "0.040000"
+  },
+  "polymarket:6423910": {
+   "platform": "polymarket",
+   "market_id": "6423910",
+   "ticker": null,
+   "yes_token": "95151897615143244718612402527052520790453943969262737268111900243076424548210",
+   "no_token": "26875977581639049816185613204817523293408442895596128752652192834235231642659",
+   "side": "yes",
+   "shares": "20",
+   "cost": "17.93706",
+   "threshold": 85.0,
+   "settle_time": "2026-11-06T17:00:00Z",
+   "asset": "SOL",
+   "direction": "above",
+   "lower": 85.0,
+   "upper": null,
+   "quality": "interpoliert",
+   "band": "punkt",
+   "hedge_cost": 0.0,
+   "mark": "0.862500"
+  },
+  "polymarket:6423924": {
+   "platform": "polymarket",
+   "market_id": "6423924",
+   "ticker": null,
+   "yes_token": "14937223738105372099982829567550734450197669427271917754165959329413701320204",
+   "no_token": "7162546586386568048831557340481213057675140183418912788790634202294066325722",
+   "side": "yes",
+   "shares": "273",
+   "cost": "157.58870",
+   "threshold": 90.0,
+   "settle_time": "2026-11-06T17:00:00Z",
+   "asset": "SOL",
+   "direction": "range",
+   "lower": 90.0,
+   "upper": 100.0,
+   "quality": "interpoliert",
+   "band": "punkt",
+   "hedge_cost": 0.0,
+   "mark": "0.500000"
+  },
+  "polymarket:6475203": {
+   "platform": "polymarket",
+   "market_id": "6475203",
+   "ticker": null,
+   "yes_token": "96173542385272647335700663443715834659892602555776154513766784695687767155217",
+   "no_token": "73969332164948962326238609001786395909049642734839673871566007099552400022141",
+   "side": "yes",
+   "shares": "8",
+   "cost": "7.72395",
+   "threshold": 1.1,
+   "settle_time": "2026-11-07T17:00:00Z",
+   "asset": "XRP",
+   "direction": "above",
+   "lower": 1.1,
+   "upper": null,
+   "quality": "interpoliert",
+   "band": "punkt",
+   "hedge_cost": 0.0,
+   "mark": "0.956000"
+  },
+  "polymarket:6475222": {
+   "platform": "polymarket",
+   "market_id": "6475222",
+   "ticker": null,
+   "yes_token": "114311088702661025219673498175130635489910839584259013052214151415242664057588",
+   "no_token": "42077421909361979973661622474003709775993995940015523002878530065920282158225",
+   "side": "yes",
+   "shares": "5",
+   "cost": "2.78694",
+   "threshold": 1.2,
+   "settle_time": "2026-11-07T17:00:00Z",
+   "asset": "XRP",
+   "direction": "range",
+   "lower": 1.2,
+   "upper": 1.3,
+   "quality": "interpoliert",
+   "band": "punkt",
+   "hedge_cost": 0.0,
+   "mark": "0.530000"
+  },
+  "polymarket:6536986": {
+   "platform": "polymarket",
+   "market_id": "6536986",
+   "ticker": null,
+   "yes_token": "14313729080191552331700863326308347046020091483858595595017747900715301192356",
+   "no_token": "7191932552352013266193822558450093588263777033365346033661082764442143307536",
+   "side": "yes",
+   "shares": "5",
+   "cost": "2.78694",
+   "threshold": 1.2,
+   "settle_time": "2026-11-08T17:00:00Z",
+   "asset": "XRP",
+   "direction": "range",
+   "lower": 1.2,
+   "upper": 1.3,
+   "quality": "interpoliert",
+   "band": "punkt",
+   "hedge_cost": 0.0,
+   "mark": "0.490000"
   }
  }
 }
