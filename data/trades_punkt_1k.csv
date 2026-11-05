@@ -143,3 +143,4 @@ time,kind,platform,market,side,shares,avg_price,fee,cash_flow,cash_after,note
 2026-11-05T00:33:23Z,SETTLE,kalshi,KXBTCD-26NOV0417-T75749.99,no,16,0,0,0,23.28346,ergebnis=yes
 2026-11-05T00:33:23Z,SETTLE,kalshi,KXBTCD-26NOV0417-T78749.99,no,5,0,0,0,23.28346,ergebnis=yes
 2026-11-05T00:33:23Z,SETTLE,kalshi,KXBTC-26NOV0417-B76375,yes,6,0,0,0,23.28346,ergebnis=no
+2026-11-05T07:26:42Z,BUY,kalshi,KXBTCD-26NOV0517-T82249.99,no,8,0.9100,0.05,-7.3300,15.95346,
