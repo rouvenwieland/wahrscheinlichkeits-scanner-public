@@ -1,7 +1,7 @@
 {
  "name": "modell_roh",
  "start": "100",
- "cash": "94.27460",
+ "cash": "88.51460",
  "positions": {
   "kalshi:KXETHY-27JAN0100-B3125": {
    "platform": "kalshi",
@@ -21,7 +21,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.936650"
+   "mark": "0.934054"
   },
   "kalshi:KXETHY-27JAN0100-B1875": {
    "platform": "kalshi",
@@ -61,7 +61,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.052000"
+   "mark": "0.046000"
   },
   "kalshi:KXBTCY-27JAN0100-B67500": {
    "platform": "kalshi",
@@ -81,7 +81,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.114650"
+   "mark": "0.111771"
   },
   "kalshi:KXBTCY-27JAN0100-B92500": {
    "platform": "kalshi",
@@ -101,7 +101,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.922000"
+   "mark": "0.919000"
   },
   "kalshi:KXBTCY-27JAN0100-B87500": {
    "platform": "kalshi",
@@ -121,7 +121,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.084000"
+   "mark": "0.083000"
   },
   "kalshi:KXETHY-27JAN0100-B2625": {
    "platform": "kalshi",
@@ -141,7 +141,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.130000"
+   "mark": "0.127716"
   },
   "polymarket:6536855": {
    "platform": "polymarket",
@@ -161,7 +161,26 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.002000"
+   "mark": "0.001000"
+  },
+  "kalshi:KXSOLE-26NOV0717-B89": {
+   "platform": "kalshi",
+   "market_id": "KXSOLE-26NOV0717-B89",
+   "ticker": "KXSOLE-26NOV0717-B89",
+   "yes_token": null,
+   "no_token": null,
+   "side": "no",
+   "shares": "32",
+   "cost": "5.7600",
+   "threshold": 89.0,
+   "settle_time": "2026-11-07T22:00:00Z",
+   "asset": "SOL",
+   "direction": "range",
+   "lower": 89.0,
+   "upper": 89.9999,
+   "quality": "vorlauf",
+   "band": "modell",
+   "hedge_cost": 0.0
   }
  }
 }

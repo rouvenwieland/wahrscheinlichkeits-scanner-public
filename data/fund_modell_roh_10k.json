@@ -1,7 +1,7 @@
 {
  "name": "modell_roh_10k",
  "start": "10000",
- "cash": "9499.13480",
+ "cash": "9376.73480",
  "positions": {
   "kalshi:KXETHY-27JAN0100-B3125": {
    "platform": "kalshi",
@@ -21,7 +21,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.927349"
+   "mark": "0.927259"
   },
   "kalshi:KXETHY-27JAN0100-B1875": {
    "platform": "kalshi",
@@ -41,7 +41,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.101646"
+   "mark": "0.101453"
   },
   "kalshi:KXETHY-27JAN0100-B1625": {
    "platform": "kalshi",
@@ -61,7 +61,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.052000"
+   "mark": "0.046000"
   },
   "kalshi:KXBTCY-27JAN0100-B67500": {
    "platform": "kalshi",
@@ -81,7 +81,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.114650"
+   "mark": "0.111771"
   },
   "kalshi:KXBTCY-27JAN0100-B92500": {
    "platform": "kalshi",
@@ -101,7 +101,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.921861"
+   "mark": "0.918425"
   },
   "kalshi:KXBTCY-27JAN0100-B87500": {
    "platform": "kalshi",
@@ -121,7 +121,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.083652"
+   "mark": "0.082712"
   },
   "kalshi:KXETHY-27JAN0100-B2625": {
    "platform": "kalshi",
@@ -141,7 +141,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.128326"
+   "mark": "0.120072"
   },
   "kalshi:KXETHY-27JAN0100-B2875": {
    "platform": "kalshi",
@@ -181,7 +181,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.147894"
+   "mark": "0.142512"
   },
   "polymarket:6536855": {
    "platform": "polymarket",
@@ -201,7 +201,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.002000"
+   "mark": "0.001000"
   },
   "kalshi:KXBTCY-27JAN0100-B82500": {
    "platform": "kalshi",
@@ -222,6 +222,25 @@
    "band": "modell",
    "hedge_cost": 0.0,
    "mark": "0.125000"
+  },
+  "kalshi:KXSOLE-26NOV0717-B89": {
+   "platform": "kalshi",
+   "market_id": "KXSOLE-26NOV0717-B89",
+   "ticker": "KXSOLE-26NOV0717-B89",
+   "yes_token": null,
+   "no_token": null,
+   "side": "no",
+   "shares": "663",
+   "cost": "122.4000",
+   "threshold": 89.0,
+   "settle_time": "2026-11-07T22:00:00Z",
+   "asset": "SOL",
+   "direction": "range",
+   "lower": 89.0,
+   "upper": 89.9999,
+   "quality": "vorlauf",
+   "band": "modell",
+   "hedge_cost": 0.0
   }
  }
 }
