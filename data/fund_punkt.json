@@ -1,7 +1,7 @@
 {
  "name": "punkt",
  "start": "100",
- "cash": "5.80857",
+ "cash": "3.21857",
  "positions": {
   "kalshi:KXBTCY-27JAN0100-B97500": {
    "platform": "kalshi",
@@ -21,7 +21,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.961000"
+   "mark": "0.948000"
   },
   "kalshi:KXBTCY-27JAN0100-B77500": {
    "platform": "kalshi",
@@ -41,7 +41,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.180000"
+   "mark": "0.209656"
   },
   "kalshi:KXBTCY-27JAN0100-B72500": {
    "platform": "kalshi",
@@ -61,7 +61,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.168015"
+   "mark": "0.166000"
   },
   "kalshi:KXETHY-27JAN0100-B3375": {
    "platform": "kalshi",
@@ -121,7 +121,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.214000"
+   "mark": "0.216000"
   },
   "kalshi:KXETHY-27JAN0100-B1875": {
    "platform": "kalshi",
@@ -161,7 +161,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.062000"
+   "mark": "0.036192"
   },
   "polymarket:6536973": {
    "platform": "polymarket",
@@ -181,7 +181,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.004000"
+   "mark": "0.001000"
   },
   "polymarket:6536942": {
    "platform": "polymarket",
@@ -221,7 +221,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.060000"
+   "mark": "0.010000"
   },
   "kalshi:KXXRPD-26NOV0817-T1.1199": {
    "platform": "kalshi",
@@ -261,7 +261,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.040000"
+   "mark": "0.020000"
   },
   "kalshi:KXSOLD-26NOV0817-T89.9999": {
    "platform": "kalshi",
@@ -281,7 +281,47 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.180000"
+   "mark": "0.140000"
+  },
+  "kalshi:KXSOLD-26NOV1317-T83.9999": {
+   "platform": "kalshi",
+   "market_id": "KXSOLD-26NOV1317-T83.9999",
+   "ticker": "KXSOLD-26NOV1317-T83.9999",
+   "yes_token": null,
+   "no_token": null,
+   "side": "no",
+   "shares": "9",
+   "cost": "1.4400",
+   "threshold": 83.9999,
+   "settle_time": "2026-11-13T22:00:00Z",
+   "asset": "SOL",
+   "direction": "above",
+   "lower": 83.9999,
+   "upper": null,
+   "quality": "interpoliert",
+   "band": "punkt",
+   "hedge_cost": 0.0,
+   "mark": "0.130000"
+  },
+  "kalshi:KXXRPD-26NOV0817-T1.1399": {
+   "platform": "kalshi",
+   "market_id": "KXXRPD-26NOV0817-T1.1399",
+   "ticker": "KXXRPD-26NOV0817-T1.1399",
+   "yes_token": null,
+   "no_token": null,
+   "side": "no",
+   "shares": "12",
+   "cost": "1.1500",
+   "threshold": 1.1399,
+   "settle_time": "2026-11-08T22:00:00Z",
+   "asset": "XRP",
+   "direction": "above",
+   "lower": 1.1399,
+   "upper": null,
+   "quality": "vorlauf",
+   "band": "punkt",
+   "hedge_cost": 0.0,
+   "mark": "0.054167"
   }
  }
 }
