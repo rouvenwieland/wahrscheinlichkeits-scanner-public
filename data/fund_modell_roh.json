@@ -1,7 +1,7 @@
 {
  "name": "modell_roh",
  "start": "100",
- "cash": "88.51460",
+ "cash": "85.05111",
  "positions": {
   "kalshi:KXETHY-27JAN0100-B3125": {
    "platform": "kalshi",
@@ -61,7 +61,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.046000"
+   "mark": "0.051000"
   },
   "kalshi:KXBTCY-27JAN0100-B67500": {
    "platform": "kalshi",
@@ -81,7 +81,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.111771"
+   "mark": "0.111000"
   },
   "kalshi:KXBTCY-27JAN0100-B92500": {
    "platform": "kalshi",
@@ -101,7 +101,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.919000"
+   "mark": "0.925000"
   },
   "kalshi:KXBTCY-27JAN0100-B87500": {
    "platform": "kalshi",
@@ -121,7 +121,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.083000"
+   "mark": "0.081000"
   },
   "kalshi:KXETHY-27JAN0100-B2625": {
    "platform": "kalshi",
@@ -141,7 +141,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.127716"
+   "mark": "0.129000"
   },
   "polymarket:6536855": {
    "platform": "polymarket",
@@ -163,24 +163,25 @@
    "hedge_cost": 0.0,
    "mark": "0.001000"
   },
-  "kalshi:KXSOLE-26NOV0717-B89": {
-   "platform": "kalshi",
-   "market_id": "KXSOLE-26NOV0717-B89",
-   "ticker": "KXSOLE-26NOV0717-B89",
-   "yes_token": null,
-   "no_token": null,
-   "side": "no",
-   "shares": "32",
-   "cost": "5.7600",
-   "threshold": 89.0,
-   "settle_time": "2026-11-07T22:00:00Z",
-   "asset": "SOL",
+  "polymarket:6587509": {
+   "platform": "polymarket",
+   "market_id": "6587509",
+   "ticker": null,
+   "yes_token": "14954533147043433118964680055499152581464960056875813081787088883330083424756",
+   "no_token": "17393130562259702712887942854743669304200521253293862927872755182047247758921",
+   "side": "yes",
+   "shares": "6",
+   "cost": "3.46349",
+   "threshold": 2200.0,
+   "settle_time": "2026-11-09T17:00:00Z",
+   "asset": "ETH",
    "direction": "range",
-   "lower": 89.0,
-   "upper": 89.9999,
-   "quality": "vorlauf",
+   "lower": 2200.0,
+   "upper": 2300.0,
+   "quality": "interpoliert",
    "band": "modell",
-   "hedge_cost": 0.0
+   "hedge_cost": 0.0,
+   "mark": "0.520000"
   }
  }
 }
