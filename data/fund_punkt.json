@@ -1,7 +1,7 @@
 {
  "name": "punkt",
  "start": "100",
- "cash": "3.21857",
+ "cash": "52.21857",
  "positions": {
   "kalshi:KXBTCY-27JAN0100-B97500": {
    "platform": "kalshi",
@@ -21,7 +21,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.948000"
+   "mark": "0.960000"
   },
   "kalshi:KXBTCY-27JAN0100-B77500": {
    "platform": "kalshi",
@@ -41,7 +41,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.205488"
+   "mark": "0.194933"
   },
   "kalshi:KXBTCY-27JAN0100-B72500": {
    "platform": "kalshi",
@@ -101,7 +101,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.940016"
+   "mark": "0.948000"
   },
   "kalshi:KXETHY-27JAN0100-B2125": {
    "platform": "kalshi",
@@ -121,7 +121,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.214000"
+   "mark": "0.215000"
   },
   "kalshi:KXETHY-27JAN0100-B1875": {
    "platform": "kalshi",
@@ -141,7 +141,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.106000"
+   "mark": "0.109000"
   },
   "polymarket:6587522": {
    "platform": "polymarket",
@@ -161,87 +161,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.023192"
-  },
-  "kalshi:KXSOLD-26NOV0817-T86.9999": {
-   "platform": "kalshi",
-   "market_id": "KXSOLD-26NOV0817-T86.9999",
-   "ticker": "KXSOLD-26NOV0817-T86.9999",
-   "yes_token": null,
-   "no_token": null,
-   "side": "no",
-   "shares": "7",
-   "cost": "0.3800",
-   "threshold": 86.9999,
-   "settle_time": "2026-11-08T22:00:00Z",
-   "asset": "SOL",
-   "direction": "above",
-   "lower": 86.9999,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "punkt",
-   "hedge_cost": 0.0,
-   "mark": "0.010000"
-  },
-  "kalshi:KXXRPD-26NOV0817-T1.1199": {
-   "platform": "kalshi",
-   "market_id": "KXXRPD-26NOV0817-T1.1199",
-   "ticker": "KXXRPD-26NOV0817-T1.1199",
-   "yes_token": null,
-   "no_token": null,
-   "side": "no",
-   "shares": "30",
-   "cost": "1.5600",
-   "threshold": 1.1199,
-   "settle_time": "2026-11-08T22:00:00Z",
-   "asset": "XRP",
-   "direction": "above",
-   "lower": 1.1199,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "punkt",
-   "hedge_cost": 0.0,
-   "mark": "0.020000"
-  },
-  "kalshi:KXSOLD-26NOV0817-T90.9999": {
-   "platform": "kalshi",
-   "market_id": "KXSOLD-26NOV0817-T90.9999",
-   "ticker": "KXSOLD-26NOV0817-T90.9999",
-   "yes_token": null,
-   "no_token": null,
-   "side": "yes",
-   "shares": "24",
-   "cost": "1.5400",
-   "threshold": 90.9999,
-   "settle_time": "2026-11-08T22:00:00Z",
-   "asset": "SOL",
-   "direction": "above",
-   "lower": 90.9999,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "punkt",
-   "hedge_cost": 0.0,
-   "mark": "0.020000"
-  },
-  "kalshi:KXSOLD-26NOV0817-T89.9999": {
-   "platform": "kalshi",
-   "market_id": "KXSOLD-26NOV0817-T89.9999",
-   "ticker": "KXSOLD-26NOV0817-T89.9999",
-   "yes_token": null,
-   "no_token": null,
-   "side": "yes",
-   "shares": "4",
-   "cost": "0.8500",
-   "threshold": 89.9999,
-   "settle_time": "2026-11-08T22:00:00Z",
-   "asset": "SOL",
-   "direction": "above",
-   "lower": 89.9999,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "punkt",
-   "hedge_cost": 0.0,
-   "mark": "0.090000"
+   "mark": "0.210000"
   },
   "kalshi:KXSOLD-26NOV1317-T83.9999": {
    "platform": "kalshi",
@@ -261,27 +181,7 @@
    "quality": "interpoliert",
    "band": "punkt",
    "hedge_cost": 0.0,
-   "mark": "0.110000"
-  },
-  "kalshi:KXXRPD-26NOV0817-T1.1399": {
-   "platform": "kalshi",
-   "market_id": "KXXRPD-26NOV0817-T1.1399",
-   "ticker": "KXXRPD-26NOV0817-T1.1399",
-   "yes_token": null,
-   "no_token": null,
-   "side": "no",
-   "shares": "12",
-   "cost": "1.1500",
-   "threshold": 1.1399,
-   "settle_time": "2026-11-08T22:00:00Z",
-   "asset": "XRP",
-   "direction": "above",
-   "lower": 1.1399,
-   "upper": null,
-   "quality": "vorlauf",
-   "band": "punkt",
-   "hedge_cost": 0.0,
-   "mark": "0.040833"
+   "mark": "0.232222"
   }
  }
 }
