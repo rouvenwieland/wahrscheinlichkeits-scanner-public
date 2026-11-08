@@ -21,7 +21,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.948000"
+   "mark": "0.940002"
   },
   "kalshi:KXETHY-27JAN0100-B1875": {
    "platform": "kalshi",
@@ -61,7 +61,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.046000"
+   "mark": "0.043000"
   },
   "kalshi:KXBTCY-27JAN0100-B67500": {
    "platform": "kalshi",
@@ -81,7 +81,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.108000"
+   "mark": "0.109000"
   },
   "kalshi:KXBTCY-27JAN0100-B92500": {
    "platform": "kalshi",
@@ -101,7 +101,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.953652"
+   "mark": "0.963113"
   },
   "kalshi:KXBTCY-27JAN0100-B87500": {
    "platform": "kalshi",
@@ -121,7 +121,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.080384"
+   "mark": "0.083251"
   },
   "kalshi:KXETHY-27JAN0100-B2625": {
    "platform": "kalshi",
@@ -141,27 +141,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.129000"
-  },
-  "polymarket:6536855": {
-   "platform": "polymarket",
-   "market_id": "6536855",
-   "ticker": null,
-   "yes_token": "74753141416911434880635546050541701948139955229031927983431625112305894867165",
-   "no_token": "11960805541892467168323066710031796465137223853241944740277126246545076996337",
-   "side": "yes",
-   "shares": "6",
-   "cost": "0.02567",
-   "threshold": 70000.0,
-   "settle_time": "2026-11-08T17:00:00Z",
-   "asset": "BTC",
-   "direction": "below",
-   "lower": null,
-   "upper": 70000.0,
-   "quality": "interpoliert",
-   "band": "modell",
-   "hedge_cost": 0.0,
-   "mark": "0.001000"
+   "mark": "0.127318"
   },
   "polymarket:6587509": {
    "platform": "polymarket",
@@ -181,7 +161,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.570000"
+   "mark": "0.600000"
   },
   "kalshi:KXETHD-26NOV1317-T2479.99": {
    "platform": "kalshi",
