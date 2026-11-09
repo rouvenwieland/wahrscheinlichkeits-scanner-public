@@ -1,0 +1,27 @@
+{
+ "name": "modell_10k",
+ "start": "10000",
+ "cash": "9653.3800",
+ "positions": {
+  "kalshi:KXETHY-27JAN0100-B1875": {
+   "platform": "kalshi",
+   "market_id": "KXETHY-27JAN0100-B1875",
+   "ticker": "KXETHY-27JAN0100-B1875",
+   "yes_token": null,
+   "no_token": null,
+   "side": "yes",
+   "shares": "2374",
+   "cost": "346.6200",
+   "threshold": 1750.0,
+   "settle_time": "2027-01-01T05:00:00Z",
+   "asset": "ETH",
+   "direction": "range",
+   "lower": 1750.0,
+   "upper": 1999.99,
+   "quality": "interpoliert",
+   "band": "modell",
+   "hedge_cost": 0.031679,
+   "mark": "0.100303"
+  }
+ }
+}
