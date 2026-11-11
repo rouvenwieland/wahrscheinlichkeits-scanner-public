@@ -41,3 +41,5 @@ time,kind,platform,market,side,shares,avg_price,fee,cash_flow,cash_after,note
 2026-11-08T19:11:54Z,SETTLE,polymarket,6536855,yes,6,0,0,0,9368.64131,ergebnis=no
 2026-11-09T22:44:05Z,SETTLE,polymarket,6587509,yes,6,0,0,0,9368.64131,ergebnis=no
 2026-11-10T20:37:29Z,BUY,polymarket,6753209,yes,969,0.56,16.71331,-559.35331,8809.28800,
+2026-11-11T08:26:36Z,BUY,kalshi,KXBTCY-27JAN0100-B102500,no,12,0.9660,0.03,-11.6220,8797.66600,
+2026-11-11T08:26:36Z,BUY,polymarket,6909156,no,10,0.82,0.10332,-8.30332,8789.36268,

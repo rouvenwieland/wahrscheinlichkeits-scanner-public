@@ -38,3 +38,4 @@ time,kind,platform,market,side,shares,avg_price,fee,cash_flow,cash_after,note
 2026-11-08T19:11:54Z,SETTLE,polymarket,6536855,yes,6,0,0,0,864.28957,ergebnis=no
 2026-11-09T22:44:05Z,SETTLE,polymarket,6587509,yes,6,0,0,0,864.28957,ergebnis=no
 2026-11-10T20:37:29Z,BUY,polymarket,6753209,yes,97,0.56,1.67306,-55.99306,808.29651,
+2026-11-11T08:26:36Z,BUY,polymarket,6909156,no,10,0.82,0.10332,-8.30332,799.99319,
