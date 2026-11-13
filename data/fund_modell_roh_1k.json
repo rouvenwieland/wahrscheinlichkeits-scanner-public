@@ -1,7 +1,7 @@
 {
  "name": "modell_roh_1k",
  "start": "1000",
- "cash": "586.20006",
+ "cash": "532.42006",
  "positions": {
   "kalshi:KXETHY-27JAN0100-B3125": {
    "platform": "kalshi",
@@ -21,7 +21,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.967077"
+   "mark": "0.969000"
   },
   "kalshi:KXETHY-27JAN0100-B1875": {
    "platform": "kalshi",
@@ -41,7 +41,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.226238"
+   "mark": "0.223944"
   },
   "kalshi:KXETHY-27JAN0100-B1625": {
    "platform": "kalshi",
@@ -81,7 +81,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.204000"
+   "mark": "0.203892"
   },
   "kalshi:KXBTCY-27JAN0100-B92500": {
    "platform": "kalshi",
@@ -101,7 +101,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.980000"
+   "mark": "0.980344"
   },
   "kalshi:KXBTCY-27JAN0100-B87500": {
    "platform": "kalshi",
@@ -121,7 +121,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.032000"
+   "mark": "0.027993"
   },
   "kalshi:KXETHY-27JAN0100-B2625": {
    "platform": "kalshi",
@@ -141,7 +141,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.078000"
+   "mark": "0.074344"
   },
   "kalshi:KXETHD-26NOV1317-T2479.99": {
    "platform": "kalshi",
@@ -181,7 +181,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.510000"
+   "mark": "0.670000"
   },
   "polymarket:6909156": {
    "platform": "polymarket",
@@ -241,7 +241,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.721000"
+   "mark": "0.719000"
   },
   "polymarket:6967560": {
    "platform": "polymarket",
@@ -261,7 +261,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.795000"
+   "mark": "0.790000"
   },
   "kalshi:KXETH-26NOV1317-B2020": {
    "platform": "kalshi",
@@ -301,7 +301,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.760000"
+   "mark": "0.749000"
   },
   "polymarket:6935830": {
    "platform": "polymarket",
@@ -321,7 +321,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.785000"
+   "mark": "0.771000"
   },
   "polymarket:6801810": {
    "platform": "polymarket",
@@ -341,7 +341,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.140000"
+   "mark": "0.120000"
   },
   "kalshi:KXBTCY-27JAN0100-B77500": {
    "platform": "kalshi",
@@ -361,7 +361,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.114000"
+   "mark": "0.110000"
   },
   "kalshi:KXBTCD-26NOV1317-T71999.99": {
    "platform": "kalshi",
@@ -381,7 +381,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.930000"
+   "mark": "0.950000"
   },
   "polymarket:6801805": {
    "platform": "polymarket",
@@ -401,7 +401,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.424245"
+   "mark": "0.424000"
   },
   "polymarket:6909241": {
    "platform": "polymarket",
@@ -421,7 +421,47 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.300990"
+   "mark": "0.310000"
+  },
+  "kalshi:KXBTCD-26NOV1317-T71499.99": {
+   "platform": "kalshi",
+   "market_id": "KXBTCD-26NOV1317-T71499.99",
+   "ticker": "KXBTCD-26NOV1317-T71499.99",
+   "yes_token": null,
+   "no_token": null,
+   "side": "no",
+   "shares": "56",
+   "cost": "52.8700",
+   "threshold": 71499.99,
+   "settle_time": "2026-11-13T22:00:00Z",
+   "asset": "BTC",
+   "direction": "above",
+   "lower": 71499.99,
+   "upper": null,
+   "quality": "interpoliert",
+   "band": "modell",
+   "hedge_cost": 0.0,
+   "mark": "0.930000"
+  },
+  "kalshi:KXBTCD-26NOV1317-T70999.99": {
+   "platform": "kalshi",
+   "market_id": "KXBTCD-26NOV1317-T70999.99",
+   "ticker": "KXBTCD-26NOV1317-T70999.99",
+   "yes_token": null,
+   "no_token": null,
+   "side": "no",
+   "shares": "1",
+   "cost": "0.9100",
+   "threshold": 70999.99,
+   "settle_time": "2026-11-13T22:00:00Z",
+   "asset": "BTC",
+   "direction": "above",
+   "lower": 70999.99,
+   "upper": null,
+   "quality": "interpoliert",
+   "band": "modell",
+   "hedge_cost": 0.0,
+   "mark": "0.890000"
   }
  }
 }
