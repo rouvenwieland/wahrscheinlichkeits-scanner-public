@@ -1,7 +1,7 @@
 {
  "name": "modell_10k",
  "start": "10000",
- "cash": "9653.3800",
+ "cash": "9534.6220",
  "positions": {
   "kalshi:KXETHY-27JAN0100-B1875": {
    "platform": "kalshi",
@@ -21,7 +21,27 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.031679,
-   "mark": "0.210280"
+   "mark": "0.208349"
+  },
+  "kalshi:KXBTCY-27JAN0100-B72500": {
+   "platform": "kalshi",
+   "market_id": "KXBTCY-27JAN0100-B72500",
+   "ticker": "KXBTCY-27JAN0100-B72500",
+   "yes_token": null,
+   "no_token": null,
+   "side": "yes",
+   "shares": "1229",
+   "cost": "118.7580",
+   "threshold": 70000.0,
+   "settle_time": "2027-01-01T05:00:00Z",
+   "asset": "BTC",
+   "direction": "range",
+   "lower": 70000.0,
+   "upper": 74999.99,
+   "quality": "interpoliert",
+   "band": "modell",
+   "hedge_cost": 0.053009,
+   "mark": "0.077074"
   }
  }
 }
