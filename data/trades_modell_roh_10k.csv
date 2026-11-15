@@ -119,3 +119,4 @@ time,kind,platform,market,side,shares,avg_price,fee,cash_flow,cash_after,note
 2026-11-15T09:47:27Z,BUY,polymarket,6936034,yes,81,0.45,1.40333,-37.85333,4296.84747,
 2026-11-15T17:47:11Z,SETTLE,polymarket,6873121,no,5,1,0,5,4301.84747,ergebnis=no
 2026-11-15T17:47:11Z,SETTLE,polymarket,6873196,yes,33,0,0,0,4301.84747,ergebnis=no
+2026-11-15T19:47:04Z,BUY,kalshi,KXETHY-27JAN0100-B2125,yes,55,0.1384545454545454545454545455,0.48,-8.0950,4293.75247,
