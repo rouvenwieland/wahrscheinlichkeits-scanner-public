@@ -21,7 +21,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.031679,
-   "mark": "0.187072"
+   "mark": "0.188755"
   },
   "kalshi:KXBTCY-27JAN0100-B72500": {
    "platform": "kalshi",
@@ -41,7 +41,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.053009,
-   "mark": "0.120026"
+   "mark": "0.118453"
   },
   "kalshi:KXBTCD-26NOV1617-T66499.99": {
    "platform": "kalshi",
@@ -61,7 +61,7 @@
    "quality": "vorlauf",
    "band": "modell",
    "hedge_cost": 0.028696,
-   "mark": "0.947756"
+   "mark": "0.960000"
   }
  }
 }
