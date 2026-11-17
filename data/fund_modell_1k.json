@@ -1,0 +1,47 @@
+{
+ "name": "modell_1k",
+ "start": "1000",
+ "cash": "901.1600",
+ "positions": {
+  "kalshi:KXBTCD-26NOV1817-T62999.99": {
+   "platform": "kalshi",
+   "market_id": "KXBTCD-26NOV1817-T62999.99",
+   "ticker": "KXBTCD-26NOV1817-T62999.99",
+   "yes_token": null,
+   "no_token": null,
+   "side": "yes",
+   "shares": "57",
+   "cost": "49.5100",
+   "threshold": 62999.99,
+   "settle_time": "2026-11-18T22:00:00Z",
+   "asset": "BTC",
+   "direction": "above",
+   "lower": 62999.99,
+   "upper": null,
+   "quality": "interpoliert",
+   "band": "modell",
+   "hedge_cost": -0.438431,
+   "mark": "0.850000"
+  },
+  "kalshi:KXBTCD-26NOV1817-T62749.99": {
+   "platform": "kalshi",
+   "market_id": "KXBTCD-26NOV1817-T62749.99",
+   "ticker": "KXBTCD-26NOV1817-T62749.99",
+   "yes_token": null,
+   "no_token": null,
+   "side": "yes",
+   "shares": "55",
+   "cost": "49.3300",
+   "threshold": 62749.99,
+   "settle_time": "2026-11-18T22:00:00Z",
+   "asset": "BTC",
+   "direction": "above",
+   "lower": 62749.99,
+   "upper": null,
+   "quality": "interpoliert",
+   "band": "modell",
+   "hedge_cost": -0.438431,
+   "mark": "0.880000"
+  }
+ }
+}
