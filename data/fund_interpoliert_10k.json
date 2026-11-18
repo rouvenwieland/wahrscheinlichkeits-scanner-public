@@ -21,7 +21,7 @@
    "quality": "interpoliert",
    "band": "huelle",
    "hedge_cost": -0.180367,
-   "mark": "0.469854"
+   "mark": "0.710000"
   },
   "kalshi:KXBTCD-26NOV1817-T62749.99": {
    "platform": "kalshi",
@@ -41,7 +41,7 @@
    "quality": "interpoliert",
    "band": "huelle",
    "hedge_cost": -0.180367,
-   "mark": "0.630000"
+   "mark": "0.380000"
   },
   "polymarket:6990916": {
    "platform": "polymarket",
@@ -61,7 +61,7 @@
    "quality": "interpoliert",
    "band": "huelle",
    "hedge_cost": -0.168604,
-   "mark": "0.001644"
+   "mark": "0.000151"
   },
   "polymarket:6990921": {
    "platform": "polymarket",
@@ -81,7 +81,7 @@
    "quality": "interpoliert",
    "band": "huelle",
    "hedge_cost": -0.121081,
-   "mark": "0.000052"
+   "mark": "0.000096"
   },
   "polymarket:6990961": {
    "platform": "polymarket",
@@ -101,7 +101,7 @@
    "quality": "interpoliert",
    "band": "huelle",
    "hedge_cost": -0.125927,
-   "mark": "0.001011"
+   "mark": "0.001001"
   }
  }
 }
