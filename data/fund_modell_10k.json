@@ -1,7 +1,7 @@
 {
  "name": "modell_10k",
  "start": "10000",
- "cash": "8604.8220",
+ "cash": "8659.8220",
  "positions": {
   "kalshi:KXETHY-27JAN0100-B1875": {
    "platform": "kalshi",
@@ -21,7 +21,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.031679,
-   "mark": "0.208741"
+   "mark": "0.210575"
   },
   "kalshi:KXBTCY-27JAN0100-B72500": {
    "platform": "kalshi",
@@ -41,67 +41,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.053009,
-   "mark": "0.066682"
-  },
-  "kalshi:KXBTCD-26NOV1817-T62999.99": {
-   "platform": "kalshi",
-   "market_id": "KXBTCD-26NOV1817-T62999.99",
-   "ticker": "KXBTCD-26NOV1817-T62999.99",
-   "yes_token": null,
-   "no_token": null,
-   "side": "yes",
-   "shares": "589",
-   "cost": "511.5100",
-   "threshold": 62999.99,
-   "settle_time": "2026-11-18T22:00:00Z",
-   "asset": "BTC",
-   "direction": "above",
-   "lower": 62999.99,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "modell",
-   "hedge_cost": -0.438431,
-   "mark": "0.030000"
-  },
-  "kalshi:KXBTCD-26NOV1817-T62749.99": {
-   "platform": "kalshi",
-   "market_id": "KXBTCD-26NOV1817-T62749.99",
-   "ticker": "KXBTCD-26NOV1817-T62749.99",
-   "yes_token": null,
-   "no_token": null,
-   "side": "yes",
-   "shares": "570",
-   "cost": "511.2100",
-   "threshold": 62749.99,
-   "settle_time": "2026-11-18T22:00:00Z",
-   "asset": "BTC",
-   "direction": "above",
-   "lower": 62749.99,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "modell",
-   "hedge_cost": -0.438431,
-   "mark": "0.130018"
-  },
-  "kalshi:KXBTCD-26NOV1817-T62499.99": {
-   "platform": "kalshi",
-   "market_id": "KXBTCD-26NOV1817-T62499.99",
-   "ticker": "KXBTCD-26NOV1817-T62499.99",
-   "yes_token": null,
-   "no_token": null,
-   "side": "no",
-   "shares": "55",
-   "cost": "4.1100",
-   "threshold": 62499.99,
-   "settle_time": "2026-11-18T22:00:00Z",
-   "asset": "BTC",
-   "direction": "above",
-   "lower": 62499.99,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "modell",
-   "hedge_cost": -0.43103,
-   "mark": "0.910000"
+   "mark": "0.073239"
   }
  }
 }

@@ -1,48 +1,8 @@
 {
  "name": "interpoliert_10k",
  "start": "10000",
- "cash": "8053.70949",
+ "cash": "11199.70949",
  "positions": {
-  "kalshi:KXBTCD-26NOV1817-T62999.99": {
-   "platform": "kalshi",
-   "market_id": "KXBTCD-26NOV1817-T62999.99",
-   "ticker": "KXBTCD-26NOV1817-T62999.99",
-   "yes_token": null,
-   "no_token": null,
-   "side": "no",
-   "shares": "3146",
-   "cost": "499.9800",
-   "threshold": 62999.99,
-   "settle_time": "2026-11-18T22:00:00Z",
-   "asset": "BTC",
-   "direction": "above",
-   "lower": 62999.99,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "huelle",
-   "hedge_cost": -0.180367,
-   "mark": "0.990000"
-  },
-  "kalshi:KXBTCD-26NOV1817-T62749.99": {
-   "platform": "kalshi",
-   "market_id": "KXBTCD-26NOV1817-T62749.99",
-   "ticker": "KXBTCD-26NOV1817-T62749.99",
-   "yes_token": null,
-   "no_token": null,
-   "side": "yes",
-   "shares": "549",
-   "cost": "492.3800",
-   "threshold": 62749.99,
-   "settle_time": "2026-11-18T22:00:00Z",
-   "asset": "BTC",
-   "direction": "above",
-   "lower": 62749.99,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "huelle",
-   "hedge_cost": -0.180367,
-   "mark": "0.130018"
-  },
   "polymarket:6990916": {
    "platform": "polymarket",
    "market_id": "6990916",
@@ -61,7 +21,7 @@
    "quality": "interpoliert",
    "band": "huelle",
    "hedge_cost": -0.168604,
-   "mark": "0.000273"
+   "mark": "0.000302"
   },
   "polymarket:6990921": {
    "platform": "polymarket",
