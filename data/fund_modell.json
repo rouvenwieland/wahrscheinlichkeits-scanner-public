@@ -21,7 +21,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": -0.357488,
-   "mark": "0.060000"
+   "mark": "0.070000"
   },
   "kalshi:KXBTCD-26NOV1817-T62249.99": {
    "platform": "kalshi",
@@ -41,7 +41,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": -0.357488,
-   "mark": "0.040000"
+   "mark": "0.050000"
   }
  }
 }
