@@ -107,3 +107,5 @@ time,kind,platform,market,side,shares,avg_price,fee,cash_flow,cash_after,note
 2026-11-17T22:47:30Z,BUY,kalshi,KXBTCD-26NOV2017-T63499.99,yes,5,0.6500,0.08,-3.3300,13.99933,
 2026-11-17T22:47:30Z,BUY,kalshi,KXETHD-26NOV1817-T1919.99,no,5,0.9300,0.03,-4.6800,9.31933,
 2026-11-18T11:47:23Z,BUY,polymarket,7042770,yes,6,0.29,0.08648,-1.82648,7.49285,
+2026-11-18T17:47:27Z,SETTLE,polymarket,6967722,yes,5,1,0,5,12.49285,ergebnis=yes
+2026-11-18T17:47:27Z,SETTLE,polymarket,6967562,yes,6,1,0,6,18.49285,ergebnis=yes
