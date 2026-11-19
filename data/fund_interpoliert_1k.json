@@ -2,46 +2,5 @@
  "name": "interpoliert_1k",
  "start": "1000",
  "cash": "1116.26864",
- "positions": {
-  "polymarket:6990916": {
-   "platform": "polymarket",
-   "market_id": "6990916",
-   "ticker": null,
-   "yes_token": "110732235218441601957994942700710397026530815850376776271988409782497150989691",
-   "no_token": "45706387109189552551007399101743943426896440238827299881499599223548946336002",
-   "side": "yes",
-   "shares": "816",
-   "cost": "49.64067",
-   "threshold": 68000.0,
-   "settle_time": "2026-11-19T17:00:00Z",
-   "asset": "BTC",
-   "direction": "range",
-   "lower": 68000.0,
-   "upper": 70000.0,
-   "quality": "interpoliert",
-   "band": "huelle",
-   "hedge_cost": -0.168604,
-   "mark": "0.000964"
-  },
-  "polymarket:6990921": {
-   "platform": "polymarket",
-   "market_id": "6990921",
-   "ticker": null,
-   "yes_token": "93379874273898266709808892034078631029780193783141675595232514019413925725358",
-   "no_token": "84476769799940842352140025887965888650990222784745418693312861695766804375441",
-   "side": "yes",
-   "shares": "1963",
-   "cost": "48.85069",
-   "threshold": 70000.0,
-   "settle_time": "2026-11-19T17:00:00Z",
-   "asset": "BTC",
-   "direction": "range",
-   "lower": 70000.0,
-   "upper": 72000.0,
-   "quality": "interpoliert",
-   "band": "huelle",
-   "hedge_cost": -0.121081,
-   "mark": "0.001000"
-  }
- }
+ "positions": {}
 }

@@ -1,7 +1,7 @@
 {
  "name": "modell_roh_1k",
  "start": "1000",
- "cash": "283.62640",
+ "cash": "347.62640",
  "positions": {
   "kalshi:KXETHY-27JAN0100-B3125": {
    "platform": "kalshi",
@@ -41,7 +41,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.283973"
+   "mark": "0.277397"
   },
   "kalshi:KXETHY-27JAN0100-B1625": {
    "platform": "kalshi",
@@ -81,7 +81,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.169000"
+   "mark": "0.163757"
   },
   "kalshi:KXBTCY-27JAN0100-B92500": {
    "platform": "kalshi",
@@ -101,7 +101,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.990000"
+   "mark": "0.991000"
   },
   "kalshi:KXBTCY-27JAN0100-B87500": {
    "platform": "kalshi",
@@ -121,7 +121,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.012130"
+   "mark": "0.011811"
   },
   "kalshi:KXETHY-27JAN0100-B2625": {
    "platform": "kalshi",
@@ -141,7 +141,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.021000"
+   "mark": "0.020500"
   },
   "kalshi:KXBTCY-27JAN0100-B77500": {
    "platform": "kalshi",
@@ -161,27 +161,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.047000"
-  },
-  "polymarket:6990904": {
-   "platform": "polymarket",
-   "market_id": "6990904",
-   "ticker": null,
-   "yes_token": "26728116817729454564800594777516351950659360290452994760910586397752573075718",
-   "no_token": "31940884973022507069118304663292118258408859256249960914183810665663964656106",
-   "side": "no",
-   "shares": "31",
-   "cost": "27.50915",
-   "threshold": 64000.0,
-   "settle_time": "2026-11-19T17:00:00Z",
-   "asset": "BTC",
-   "direction": "range",
-   "lower": 64000.0,
-   "upper": 66000.0,
-   "quality": "interpoliert",
-   "band": "modell",
-   "hedge_cost": 0.0,
-   "mark": "0.994000"
+   "mark": "0.045000"
   },
   "kalshi:KXBTCD-26NOV2017-T66999.99": {
    "platform": "kalshi",
@@ -221,7 +201,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.110000"
+   "mark": "0.090000"
   },
   "kalshi:KXXRPD-26NOV2017-T1.0199": {
    "platform": "kalshi",
@@ -241,7 +221,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.742105"
+   "mark": "0.780000"
   },
   "kalshi:KXBTCD-26NOV2017-T66499.99": {
    "platform": "kalshi",
@@ -261,7 +241,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.040000"
+   "mark": "0.030000"
   },
   "kalshi:KXBTCD-26NOV2017-T65499.99": {
    "platform": "kalshi",
@@ -281,7 +261,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.100000"
+   "mark": "0.080000"
   },
   "kalshi:KXSOLD-26NOV2017-T65.9999": {
    "platform": "kalshi",
@@ -341,7 +321,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.060000"
+   "mark": "0.050000"
   },
   "kalshi:KXXRPD-26NOV2017-T1.0399": {
    "platform": "kalshi",
@@ -363,46 +343,6 @@
    "hedge_cost": 0.0,
    "mark": "0.840000"
   },
-  "polymarket:6990894": {
-   "platform": "polymarket",
-   "market_id": "6990894",
-   "ticker": null,
-   "yes_token": "60015354138572358798574869027211421164401955484692479273860389362505798254586",
-   "no_token": "63848106864161895439214188948756300633952128967650675060682148386651458479838",
-   "side": "no",
-   "shares": "8",
-   "cost": "5.29606",
-   "threshold": 62000.0,
-   "settle_time": "2026-11-19T17:00:00Z",
-   "asset": "BTC",
-   "direction": "below",
-   "lower": null,
-   "upper": 62000.0,
-   "quality": "interpoliert",
-   "band": "modell",
-   "hedge_cost": 0.0,
-   "mark": "0.982000"
-  },
-  "polymarket:6990957": {
-   "platform": "polymarket",
-   "market_id": "6990957",
-   "ticker": null,
-   "yes_token": "24816011606481933660377369402805788838735178887666085275918714805559370123277",
-   "no_token": "3933125919185934711087678508563721754621607527055113124848481142176199560537",
-   "side": "yes",
-   "shares": "5",
-   "cost": "2.55248",
-   "threshold": 64000.0,
-   "settle_time": "2026-11-19T17:00:00Z",
-   "asset": "BTC",
-   "direction": "above",
-   "lower": 64000.0,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "modell",
-   "hedge_cost": 0.0,
-   "mark": "0.002000"
-  },
   "polymarket:7018435": {
    "platform": "polymarket",
    "market_id": "7018435",
@@ -421,27 +361,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.034000"
-  },
-  "polymarket:6990907": {
-   "platform": "polymarket",
-   "market_id": "6990907",
-   "ticker": null,
-   "yes_token": "36703334557630502345299879473067508727298913119367128717780963464203579263986",
-   "no_token": "27880595573481876497576834500597368359872078587642814885110007985647368023440",
-   "side": "yes",
-   "shares": "5",
-   "cost": "3.23649",
-   "threshold": 1700.0,
-   "settle_time": "2026-11-19T17:00:00Z",
-   "asset": "ETH",
-   "direction": "above",
-   "lower": 1700.0,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "modell",
-   "hedge_cost": 0.0,
-   "mark": "0.996000"
+   "mark": "0.031000"
   },
   "polymarket:7018428": {
    "platform": "polymarket",
@@ -461,7 +381,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.881000"
+   "mark": "0.872000"
   },
   "kalshi:KXETHY-27JAN0100-B1375": {
    "platform": "kalshi",
@@ -481,27 +401,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.088846"
-  },
-  "polymarket:6990900": {
-   "platform": "polymarket",
-   "market_id": "6990900",
-   "ticker": null,
-   "yes_token": "24718344709793587826121538023343649444311176876066445105051432556230974623947",
-   "no_token": "83466908725000113874839979899093227822883265187635948785694807206929933393400",
-   "side": "yes",
-   "shares": "5",
-   "cost": "3.80115",
-   "threshold": 1600.0,
-   "settle_time": "2026-11-19T17:00:00Z",
-   "asset": "ETH",
-   "direction": "above",
-   "lower": 1600.0,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "modell",
-   "hedge_cost": 0.0,
-   "mark": "0.999000"
+   "mark": "0.089641"
   },
   "kalshi:KXSOLD-26NOV2017-T59.9999": {
    "platform": "kalshi",
@@ -561,7 +461,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.930000"
+   "mark": "0.960000"
   },
   "polymarket:7018489": {
    "platform": "polymarket",
@@ -581,7 +481,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.310000"
+   "mark": "0.280000"
   },
   "polymarket:7042771": {
    "platform": "polymarket",
@@ -601,7 +501,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.410000"
+   "mark": "0.370000"
   },
   "polymarket:7042975": {
    "platform": "polymarket",
@@ -621,27 +521,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.600000"
-  },
-  "polymarket:6991019": {
-   "platform": "polymarket",
-   "market_id": "6991019",
-   "ticker": null,
-   "yes_token": "83493976934866635621861496575733752749830671559573157255577980664568676485720",
-   "no_token": "27940240733848621567653692101314278707333454989721271096354849459547866223906",
-   "side": "yes",
-   "shares": "5",
-   "cost": "2.78694",
-   "threshold": 0.9,
-   "settle_time": "2026-11-19T17:00:00Z",
-   "asset": "XRP",
-   "direction": "range",
-   "lower": 0.9,
-   "upper": 1.0,
-   "quality": "interpoliert",
-   "band": "modell",
-   "hedge_cost": 0.0,
-   "mark": "0.970000"
+   "mark": "0.610000"
   },
   "kalshi:KXXRPD-26NOV2017-T1.0799": {
    "platform": "kalshi",
@@ -661,47 +541,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.900000"
-  },
-  "polymarket:6990967": {
-   "platform": "polymarket",
-   "market_id": "6990967",
-   "ticker": null,
-   "yes_token": "114071905896841387669615304640294291840164123601619232511923265573589257511434",
-   "no_token": "59959533425602204159917443105116772996360868877296938830134615084709557046085",
-   "side": "yes",
-   "shares": "20",
-   "cost": "8.48800",
-   "threshold": 1800.0,
-   "settle_time": "2026-11-19T17:00:00Z",
-   "asset": "ETH",
-   "direction": "range",
-   "lower": 1800.0,
-   "upper": 1900.0,
-   "quality": "interpoliert",
-   "band": "modell",
-   "hedge_cost": 0.0,
-   "mark": "0.004000"
-  },
-  "polymarket:6990918": {
-   "platform": "polymarket",
-   "market_id": "6990918",
-   "ticker": null,
-   "yes_token": "19863812685499304996575628931593973976726962676491322176064568481517808563219",
-   "no_token": "102657462094633225031008901344830342967868085843706171291367289671060037982360",
-   "side": "no",
-   "shares": "10",
-   "cost": "8.96853",
-   "threshold": 1900.0,
-   "settle_time": "2026-11-19T17:00:00Z",
-   "asset": "ETH",
-   "direction": "above",
-   "lower": 1900.0,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "modell",
-   "hedge_cost": 0.0,
-   "mark": "0.999000"
+   "mark": "0.910000"
   },
   "polymarket:7097132": {
    "platform": "polymarket",
@@ -721,7 +561,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.0,
-   "mark": "0.770000"
+   "mark": "0.760000"
   },
   "kalshi:KXXRP-26NOV1917-B1.0099500": {
    "platform": "kalshi",

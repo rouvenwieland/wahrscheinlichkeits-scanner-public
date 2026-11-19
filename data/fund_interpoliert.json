@@ -2,26 +2,5 @@
  "name": "interpoliert",
  "start": "100",
  "cash": "194.27201",
- "positions": {
-  "polymarket:6990961": {
-   "platform": "polymarket",
-   "market_id": "6990961",
-   "ticker": null,
-   "yes_token": "23823701699946497611159545553087721807135136850442006026777614630680255253196",
-   "no_token": "28297373677524190050735827969560313467483569319908478190412514262688352247642",
-   "side": "yes",
-   "shares": "176",
-   "cost": "4.88799",
-   "threshold": 70000.0,
-   "settle_time": "2026-11-19T17:00:00Z",
-   "asset": "BTC",
-   "direction": "above",
-   "lower": 70000.0,
-   "upper": null,
-   "quality": "interpoliert",
-   "band": "huelle",
-   "hedge_cost": -0.125927,
-   "mark": "0.001000"
-  }
- }
+ "positions": {}
 }
