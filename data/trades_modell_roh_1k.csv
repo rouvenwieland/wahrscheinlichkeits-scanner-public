@@ -235,3 +235,5 @@ time,kind,platform,market,side,shares,avg_price,fee,cash_flow,cash_after,note
 2026-11-22T17:47:15Z,SETTLE,polymarket,7073762,no,461,0,0,0,487.77756,ergebnis=yes
 2026-11-22T17:47:15Z,SETTLE,polymarket,7073785,yes,33,0,0,0,487.77756,ergebnis=no
 2026-11-22T17:47:15Z,SETTLE,polymarket,7073674,no,12,1,0,12,499.77756,ergebnis=no
+2026-11-22T20:47:25Z,BUY,kalshi,KXBTC-26NOV2217-B60625,no,35,0.6200,0.58,-22.2800,477.49756,
+2026-11-22T20:47:25Z,BUY,kalshi,KXETHD-26NOV2217-T1719.99,yes,159,0.1900,1.72,-31.9300,445.56756,
