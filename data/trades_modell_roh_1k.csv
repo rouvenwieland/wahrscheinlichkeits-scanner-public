@@ -272,3 +272,4 @@ time,kind,platform,market,side,shares,avg_price,fee,cash_flow,cash_after,note
 2026-11-23T22:47:30Z,SETTLE,kalshi,KXETH-26NOV2317-B1800,yes,1,0,0,0,749.94622,ergebnis=no
 2026-11-23T22:47:30Z,SETTLE,kalshi,KXSOLD-26NOV2317-T76.9999,no,2,1,0,2,751.94622,ergebnis=no
 2026-11-23T22:47:30Z,SETTLE,kalshi,KXSOLD-26NOV2317-T75.9999,no,2,1,0,2,753.94622,ergebnis=no
+2026-11-24T00:47:25Z,BUY,kalshi,KXSOLD-26NOV2717-T72.9999,yes,4,0.3600,0.07,-1.5100,752.43622,
