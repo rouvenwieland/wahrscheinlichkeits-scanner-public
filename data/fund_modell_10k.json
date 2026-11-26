@@ -21,7 +21,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.031679,
-   "mark": "0.133922"
+   "mark": "0.215124"
   },
   "kalshi:KXBTCY-27JAN0100-B72500": {
    "platform": "kalshi",
@@ -41,7 +41,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.053009,
-   "mark": "0.053337"
+   "mark": "0.071687"
   },
   "kalshi:KXBTCY-27JAN0100-B62500": {
    "platform": "kalshi",
@@ -61,7 +61,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.065532,
-   "mark": "0.220805"
+   "mark": "0.234769"
   },
   "kalshi:KXETHY-27JAN0100-B1375": {
    "platform": "kalshi",
@@ -81,7 +81,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.028186,
-   "mark": "0.109084"
+   "mark": "0.128297"
   },
   "polymarket:7176622": {
    "platform": "polymarket",
@@ -101,7 +101,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.017843,
-   "mark": "0.969621"
+   "mark": "0.979786"
   }
  }
 }
