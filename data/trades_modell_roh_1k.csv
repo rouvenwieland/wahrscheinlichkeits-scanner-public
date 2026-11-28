@@ -348,3 +348,4 @@ time,kind,platform,market,side,shares,avg_price,fee,cash_flow,cash_after,note
 2026-11-27T22:47:24Z,SETTLE,kalshi,KXSOLD-26NOV2717-T70.9999,yes,3,1,0,3,753.25141,ergebnis=yes
 2026-11-27T22:47:24Z,SETTLE,kalshi,KXXRPD-26NOV2717-T0.9799,no,1,1,0,1,754.25141,ergebnis=no
 2026-11-27T22:47:24Z,SETTLE,kalshi,KXXRP-26NOV2717-B0.9299500,yes,269,0,0,0,754.25141,ergebnis=no
+2026-11-28T02:47:15Z,BUY,kalshi,KXXRPD-26DEC0417-T0.8799,yes,91,0.6900,1.37,-64.1600,690.09141,

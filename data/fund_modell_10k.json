@@ -1,7 +1,7 @@
 {
  "name": "modell_10k",
  "start": "10000",
- "cash": "8329.04567",
+ "cash": "8145.04567",
  "positions": {
   "kalshi:KXETHY-27JAN0100-B1875": {
    "platform": "kalshi",
@@ -21,7 +21,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.031679,
-   "mark": "0.201663"
+   "mark": "0.192137"
   },
   "kalshi:KXBTCY-27JAN0100-B72500": {
    "platform": "kalshi",
@@ -41,7 +41,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.053009,
-   "mark": "0.065016"
+   "mark": "0.065173"
   },
   "kalshi:KXBTCY-27JAN0100-B62500": {
    "platform": "kalshi",
@@ -61,7 +61,7 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.065532,
-   "mark": "0.202007"
+   "mark": "0.187970"
   },
   "kalshi:KXETHY-27JAN0100-B1375": {
    "platform": "kalshi",
@@ -81,7 +81,27 @@
    "quality": "interpoliert",
    "band": "modell",
    "hedge_cost": 0.028186,
-   "mark": "0.137787"
+   "mark": "0.143606"
+  },
+  "kalshi:KXXRPD-26DEC0417-T0.8799": {
+   "platform": "kalshi",
+   "market_id": "KXXRPD-26DEC0417-T0.8799",
+   "ticker": "KXXRPD-26DEC0417-T0.8799",
+   "yes_token": null,
+   "no_token": null,
+   "side": "yes",
+   "shares": "261",
+   "cost": "184.0000",
+   "threshold": 0.8799,
+   "settle_time": "2026-12-04T22:00:00Z",
+   "asset": "XRP",
+   "direction": "above",
+   "lower": 0.8799,
+   "upper": null,
+   "quality": "interpoliert",
+   "band": "modell",
+   "hedge_cost": 0.029756,
+   "mark": "0.680000"
   }
  }
 }
